@@ -47,8 +47,17 @@ function App() {
     <ApolloProvider client={client}>
       <Header />
       <Router>
-        <Box paddingTop={'130px'} overflowX={'hidden'}>
-          <Home />
+        <Box paddingTop={'130px'}>
+          <Routes>
+            <Route
+              path='/'
+              element={<Home />}
+            />
+            <Route
+              path='/store'
+              element={<Store />}
+            />
+          </Routes>
         </Box>
       </Router>
     </ApolloProvider>
