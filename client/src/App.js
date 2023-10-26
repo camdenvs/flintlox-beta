@@ -8,6 +8,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
+import Home from './pages/Home';
 import Store from './pages/Store'
 import Product from './pages/Product'
 import Signup from './pages/Signup'
@@ -15,6 +16,7 @@ import Login from './pages/Login'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Success from './pages/Success';
+import { Box } from '@chakra-ui/react';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -45,7 +47,9 @@ function App() {
     <ApolloProvider client={client}>
       <Header />
       <Router>
-        
+        <Box paddingTop={'130px'} overflowX={'hidden'}>
+          <Home />
+        </Box>
       </Router>
     </ApolloProvider>
   );
