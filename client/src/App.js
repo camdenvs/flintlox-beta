@@ -57,6 +57,10 @@ function App() {
               path='/store'
               element={<Store />}
             />
+            <Route
+              path='/products'
+              element={<Product />}
+            />
           </Routes>
         </Box>
       </Router>
