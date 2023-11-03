@@ -16,20 +16,24 @@ const productSchema = new Schema(
             type: String,
             required: true
         },
-        image: {
-            type: String,
+        images: {
+            type: [String],
             required: true
         },
-        category: {
+        subcategory: {
             type: String,
             required: true,
             default: 'other'
         },
-        sizes: {
-            type: String,
-            default: ''
-        },
         stripeProductId: {
+            type: String,
+            required: true
+        },
+        availableCount: {
+            type: Number,
+            required: true
+        },
+        releaseDate: {
             type: String,
             required: true
         }

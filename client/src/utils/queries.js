@@ -1,56 +1,16 @@
 import { gql } from '@apollo/client';
 
-export const QUERY_CAMPAIGNS = gql`
-  query getCampaigns {
-    campaigns {
-      _id
-      title
-      image
-      goalAmount
-      goalDate
-      earned
-      investorCount
-      description
-      isActive
-      createdAt
-      link
-    }
-  }
-`;
-
-export const QUERY_SINGLE_CAMPAIGN = gql`
-  query getSingleCampaign($campaignId: ID!) {
-    campaign(campaignId: $campaignId) {
-      _id
-      title
-      goalAmount
-      goalDate
-      earned
-      investorCount
-      description
-      isActive
-      image
-      updates {
-        authorId
-        title
-        body
-        createdAt
-      }
-      comments
-      story
-    }
-  }
-`;
-
 export const QUERY_PRODUCTS = gql`
-  query getProducts($category: String) {
-    products(category: $category) {
+  query getProducts($subcategory: String) {
+    products(subcategory: $subcategory) {
       _id
       name
       price
       description
-      image
-      category
+      images
+      subcategory
+      availableCount
+      releaseDate
     }
   }
 `;
@@ -62,31 +22,10 @@ export const QUERY_SINGLE_PRODUCT = gql`
       name
       price
       description
-      image
-      category
-      sizes
-    }
-  }
-`;
-
-export const QUERY_NEWS = gql`
-  query getNews {
-    allNews {
-      _id
-      title
-      body
-      createdAt
-    }
-  }
-`;
-
-export const QUERY_SINGLE_NEWS = gql`
-  query getNews($newsId: ID!) {
-    news(newsId: $newsId) {
-      _id
-      title
-      body
-      createdAt
+      images
+      subcategory
+      availableCount
+      releaseDate
     }
   }
 `;
