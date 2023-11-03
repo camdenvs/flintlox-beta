@@ -20,10 +20,11 @@ const typeDefs = gql`
         name: String
         price: Int
         description: String
-        image: String
-        category: String
-        sizes: String
+        images: [String]
+        subcategory: String
         stripeProductId: String
+        availableCount: Int
+        releaseDate: String
     }
 
     type Item {
@@ -59,7 +60,7 @@ const typeDefs = gql`
         users: [User]
         me: User
         user(username: String!): User
-        products(category: String): [Product]
+        products(subcategory: String): [Product]
         product(productId: ID!): Product
         orders(userId: ID): Order
         cart(userId: ID!): Cart
@@ -67,7 +68,7 @@ const typeDefs = gql`
     }
     
     type Mutation {
-        createProduct(name: String! price: Int!, description: String!, image: String!, category: String!, sizes: String): Product
+        createProduct(name: String! price: Int!, description: String!, image: String!, subcategory: String!, availableCount: Int!, releaseDate: String!): Product
         removeProduct(productId: ID!): Product
         createUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth

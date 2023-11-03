@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Product, Order, Cart } = require('../models');
+const { User, Product, Order, Cart, Category } = require('../models');
 const { signToken } = require('../utils/auth');
 require('dotenv').config()
 const stripe = require("stripe")(process.env.STRIPE_KEY)
@@ -12,8 +12,8 @@ const resolvers = {
         user: async (parent, { username }) => {
             return await User.findOne({ username })
         },
-        products: async (parent, { category }) => {
-            const params = category ? { category } : {}
+        products: async (parent, { subcategory }) => {
+            const params = subcategory ? { subcategory } : {}
             return await Product.find(params)
         },
         product: async (parent, { productId }) => {
@@ -77,7 +77,7 @@ const resolvers = {
                     currency: 'usd',
                 }
             })
-            return await Product.create({ name, price, description, image: 'all-caps-placeholder.jpg', category, sizes, stripeProductId: stripeProduct.id })
+            return await Product.create({ name, price, description, image, category, sizes, stripeProductId: stripeProduct.id })
         },
         removeProduct: async (parent, { productId }) => {
             return await Product.findOneAndDelete({ _id: productId })

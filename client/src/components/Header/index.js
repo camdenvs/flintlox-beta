@@ -1,6 +1,5 @@
 import React from 'react'
-import { Link as RouteLink } from 'react-router-dom'
-import { Flex, Link, UnorderedList, ListItem, Image, Menu, MenuButton, MenuList, MenuItem, Hide, Show, Box, Heading, Text } from '@chakra-ui/react'
+import { Link, Image, Box, Heading, Text } from '@chakra-ui/react'
 import { FaBars } from 'react-icons/fa'
 import Auth from '../../utils/auth'
 import ShoppingCart from './ShoppingCart'
@@ -31,7 +30,7 @@ const Header = () => {
                 padding={{"base": "0px 15px", "sm": "0px 40px"}}
                 borderBottom={'1px solid #A6A6A6'}
             >
-                <Image></Image>
+                <Image src='/Flintlox_Logo.png' width='75px'/>
                 <Box
                     display={'flex'}
                     flexDirection={'column'}
@@ -42,7 +41,7 @@ const Header = () => {
                     <Text fontSize={'14px'} fontWeight={'400'}>Handcrafted in the United States of America</Text>
                 </Box>
                 
-                <Box>
+                <Box width='75px'>
                     <Text>Account</Text>
                     <Text>Cart</Text>
                 </Box>
@@ -56,13 +55,13 @@ const Header = () => {
                 height={'34px'}
                 margin={'0px 2.5%'}
             >
-                <Link margin={'0px 20px'}>Home</Link>
-                <Link margin={'0px 20px'}>Latest Releases</Link>
-                <Link margin={'0px 20px'}>Leather</Link>
-                <Link margin={'0px 20px'}>Apparel</Link>
-                <Link margin={'0px 20px'}>Imperfect Items</Link>
-                <Link margin={'0px 20px'}>About Us</Link>
-                <Link margin={'0px 20px'}>Contact</Link>
+                <Link margin={'0px 20px'} href='/'>Home</Link>
+                <Link margin={'0px 20px'} href='/store'>Latest Releases</Link>
+                <Link margin={'0px 20px'} href='/category/leather'>Leather</Link>
+                <Link margin={'0px 20px'} href='/category/apparel'>Apparel</Link>
+                <Link margin={'0px 20px'} href='/imperfect'>Imperfect Items</Link>
+                <Link margin={'0px 20px'} href='/about'>About Us</Link>
+                <Link margin={'0px 20px'} href='/'>Contact</Link>
             </Box>
         </Box>
     )

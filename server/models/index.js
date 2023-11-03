@@ -3,4 +3,4 @@ const Product = require('./Product')
 const Order = require('./Order')
 const Cart = require('./Cart')
 
-module.exports = { User, Campaign, News, Product, Order, Cart }
+module.exports = { User, Product, Order, Cart }
