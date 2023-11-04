@@ -1,21 +1,21 @@
 import React from 'react'
 import { Link, Image, Box, Heading, Text } from '@chakra-ui/react'
-import { FaBars } from 'react-icons/fa'
-import Auth from '../../utils/auth'
-import ShoppingCart from './ShoppingCart'
+// import { FaBars } from 'react-icons/fa'
+// import Auth from '../../utils/auth'
+// import ShoppingCart from './ShoppingCart'
 
-import { useQuery } from '@apollo/client'
-import { QUERY_CART } from '../../utils/queries'
+// import { useQuery } from '@apollo/client'
+// import { QUERY_CART } from '../../utils/queries'
 
 const Header = () => {
-    const logout = (event) => {
-        event.preventDefault()
-        Auth.logout()
-    }
+    // const logout = (event) => {
+    //     event.preventDefault()
+    //     Auth.logout()
+    // }
 
-    const userId = Auth.loggedIn() ? Auth.getProfile().data._id : undefined
-    const { loading, data } = useQuery(QUERY_CART, { variables: { userId: userId } })
-    const cart = data?.cart || {}
+    // const userId = Auth.loggedIn() ? Auth.getProfile().data._id : undefined
+    // const { loading, data } = useQuery(QUERY_CART, { variables: { userId: userId } })
+    // const cart = data?.cart || {}
 
     return (
         <Box display='block' backgroundColor='#fff' color='#0F0F0F' pos='fixed' zIndex='1001' width='100%' top='0' left='0'>

@@ -6,17 +6,17 @@ import {
   createHttpLink,
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Category from './pages/Category'
 import Product from './pages/Product'
 import Store from './pages/Store';
-import Signup from './pages/Signup'
-import Login from './pages/Login'
+// import Signup from './pages/Signup'
+// import Login from './pages/Login'
 import Header from './components/Header'
-import Footer from './components/Footer'
-import Success from './pages/Success';
+// import Footer from './components/Footer'
+// import Success from './pages/Success';
 import { Box } from '@chakra-ui/react';
 
 // Construct our main GraphQL API endpoint
