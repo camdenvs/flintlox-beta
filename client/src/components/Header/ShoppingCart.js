@@ -32,7 +32,7 @@ const ShoppingCart = ({ cart, loading }) => {
     const [checkout, { data }] = useLazyQuery(CHECKOUT)
 
     const stripePromise = loadStripe(
-        "pk_test_51O4QcTGBA1AtrZ4wrtSeRhAUC2eHLDLJm7IdmV6VPI6l2X1Baj1m2odpLh16rewa2K6rg1FOpKckdckHze7LW2R400xZWSPjV1"
+        "pk_live_51O4QcTGBA1AtrZ4wFBOkpHqaa4WlRyR9f8mWfPba4K20J6P5tNkFqTPxbWgvC5gvGsDYIcUDqnqv0Ybe5fxpeU7a00565rG0pu"
     );
 
     useEffect(() => {
