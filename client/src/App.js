@@ -46,8 +46,8 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Header />
       <Router>
+        <Header />
         <Box paddingTop={'130px'}>
           <Routes>
             <Route
