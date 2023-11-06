@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, Image, Box, Heading, Text } from '@chakra-ui/react'
+import { Link as ReactLink } from 'react-router-dom'
 // import { FaBars } from 'react-icons/fa'
 // import Auth from '../../utils/auth'
 // import ShoppingCart from './ShoppingCart'
@@ -55,13 +56,13 @@ const Header = () => {
                 height={'34px'}
                 margin={'0px 2.5%'}
             >
-                <Link margin={'0px 20px'} href='/'>Home</Link>
-                <Link margin={'0px 20px'} href='/store'>Latest Releases</Link>
-                <Link margin={'0px 20px'} href='/category/leather'>Leather</Link>
-                <Link margin={'0px 20px'} href='/category/apparel'>Apparel</Link>
-                <Link margin={'0px 20px'} href='/imperfect'>Imperfect Items</Link>
-                <Link margin={'0px 20px'} href='/about'>About Us</Link>
-                <Link margin={'0px 20px'} href='/'>Contact</Link>
+                <Link as={ReactLink} margin={'0px 20px'} to='/'>Home</Link>
+                <Link as={ReactLink} margin={'0px 20px'} to='/store'>Latest Releases</Link>
+                <Link as={ReactLink} margin={'0px 20px'} to='/category/leather'>Leather</Link>
+                <Link as={ReactLink} margin={'0px 20px'} to='/category/apparel'>Apparel</Link>
+                <Link as={ReactLink} margin={'0px 20px'} to='/imperfect'>Imperfect Items</Link>
+                <Link as={ReactLink} margin={'0px 20px'} to='/about'>About Us</Link>
+                <Link as={ReactLink} margin={'0px 20px'} to='/'>Contact</Link>
             </Box>
         </Box>
     )
