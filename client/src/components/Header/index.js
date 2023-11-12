@@ -38,7 +38,7 @@ const Header = () => {
                 padding={{ "base": "0px 15px", "sm": "0px 40px" }}
                 borderBottom={'1px solid #A6A6A6'}
             >
-                <Image src='/Flintlox_Logo.png' width='75px' />
+                <Image src='/Flintlox_Logo.png' width={{'base': '60px', 'md': '75px'}} />
                 <Box
                     display={'flex'}
                     flexDirection={'column'}
@@ -49,9 +49,9 @@ const Header = () => {
                     <Text display={{ 'base': 'none', 'md': 'flex' }} fontSize={'14px'} fontWeight={'400'}>Handcrafted in the United States of America</Text>
                 </Box>
 
-                <Box width='75px'>
-                    <Text>Account</Text>
-                    <Text>Cart</Text>
+                <Box width={{'base': '60px', 'md': '75px'}} textAlign={'center'}>
+                    <Text fontSize={{'base': '12px', 'md': '14px'}}>Account</Text>
+                    <Text fontSize={{'base': '12px', 'md': '14px'}}>Cart</Text>
                 </Box>
             </Box>
             <Box
