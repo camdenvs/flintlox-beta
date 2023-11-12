@@ -24,8 +24,9 @@ const Home = () => {
                 <Text>Next product drop in: </Text>
             </Box>
             <Box
+                flexDirection={{ 'base': 'column', 'md': 'row' }}
                 width={'100%'}
-                padding={'20px'}
+                padding={'10px'}
                 display={'flex'}
                 justifyContent={'space-evenly'}
             >
@@ -33,6 +34,7 @@ const Home = () => {
                     display={'flex'}
                     flexDirection={'column'}
                     alignItems={'center'}
+                    margin={{'base': '10px'}}
                 >
                     <Image src='https://placehold.co/240x160'/>
                     <Text width={'200px'} textAlign={'center'}>Shop our currently available wallets</Text>
@@ -41,6 +43,7 @@ const Home = () => {
                     display={'flex'}
                     flexDirection={'column'}
                     alignItems={'center'}
+                    margin={{'base': '10px'}}
                 >
                     <Image src='https://placehold.co/240x160'/>
                     <Text width={'200px'} textAlign={'center'}>Shop our currently available bags</Text>
@@ -49,6 +52,7 @@ const Home = () => {
                     display={'flex'}
                     flexDirection={'column'}
                     alignItems={'center'}
+                    margin={{'base': '10px'}}
                 >
                     <Image src='https://placehold.co/240x160'/>
                     <Text width={'200px'} textAlign={'center'}>Shop our currently available keychains, trays, notebooks, and more.</Text>
