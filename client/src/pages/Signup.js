@@ -40,7 +40,7 @@ const Signup = () => {
 
     return (
         <Box
-            bgImage={"url('/assets/images/bckgrnd-banner1.jpg')"}
+            bgImage={"url('/images/bckgrnd-banner1.jpg')"}
             bgPosition="center"
             bgSize="cover"
             bgRepeat="no-repeat"

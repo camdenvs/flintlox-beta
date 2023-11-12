@@ -15,7 +15,7 @@ import {
     useToast
 } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
-import { FaShoppingCart, FaTrash } from 'react-icons/fa'
+import { FaTrash } from 'react-icons/fa'
 import { REMOVE_FROM_CART, CLEAR_CART } from '../../utils/mutations'
 import { CHECKOUT } from '../../utils/queries'
 import { useMutation, useLazyQuery } from '@apollo/client'
@@ -93,7 +93,7 @@ const ShoppingCart = ({ cart, loading }) => {
     if (!Auth.loggedIn()) {
         return (
             <>
-                <Button _hover='none' fontSize={'36'} bg='none' _focus={{ 'bg': 'none' }} onClick={onOpen} ref={btnRef}><FaShoppingCart></FaShoppingCart></Button>
+                <Button _hover='none' bg='none' _focus={{ 'bg': 'none' }} onClick={onOpen} ref={btnRef} fontWeight={'700'} textColor={'#0F0F0F'} height={'auto'}>CART</Button>
                 <Drawer
                     isOpen={isOpen}
                     placement='right'
@@ -113,7 +113,7 @@ const ShoppingCart = ({ cart, loading }) => {
 
     return (
         <>
-            <Button _hover='none' fontSize={'36'} bg='none' _focus={{ 'bg': 'none' }} onClick={onOpen} ref={btnRef}><FaShoppingCart></FaShoppingCart></Button>
+            <Button _hover='none' bg='none' _focus={{ 'bg': 'none' }} onClick={onOpen} ref={btnRef} fontWeight={'700'} textColor={'#0F0F0F'} height={'auto'}>CART</Button>
             <Drawer
                 isOpen={isOpen}
                 placement='right'
