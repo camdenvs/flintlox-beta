@@ -1,5 +1,6 @@
 import React from 'react'
-import { Box, Heading, Image, Text } from '@chakra-ui/react'
+import { Box, Heading, Image, Link, Text } from '@chakra-ui/react'
+import { Link as ReactLink } from 'react-router-dom'
 
 const Home = () => {
 
@@ -36,7 +37,7 @@ const Home = () => {
                     alignItems={'center'}
                     margin={{'base': '10px'}}
                 >
-                    <Image src='https://placehold.co/240x160'/>
+                    <Link as={ReactLink} to='/store/wallets'><Image src={'https://placehold.co/240x160'}/></Link>
                     <Text width={'200px'} textAlign={'center'}>Shop our currently available wallets</Text>
                 </Box>
                 <Box
@@ -45,7 +46,7 @@ const Home = () => {
                     alignItems={'center'}
                     margin={{'base': '10px'}}
                 >
-                    <Image src='https://placehold.co/240x160'/>
+                    <Link as={ReactLink} to='/store/bags'><Image src='https://placehold.co/240x160'/></Link>
                     <Text width={'200px'} textAlign={'center'}>Shop our currently available bags</Text>
                 </Box>
                 <Box 
@@ -54,7 +55,7 @@ const Home = () => {
                     alignItems={'center'}
                     margin={{'base': '10px'}}
                 >
-                    <Image src='https://placehold.co/240x160'/>
+                    <Link as={ReactLink} to='/store'><Image src='https://placehold.co/240x160'/></Link>
                     <Text width={'200px'} textAlign={'center'}>Shop our currently available keychains, trays, notebooks, and more.</Text>
                 </Box>
             </Box>

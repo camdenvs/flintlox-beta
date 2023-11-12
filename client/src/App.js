@@ -12,8 +12,8 @@ import Home from './pages/Home';
 import Category from './pages/Category'
 import Product from './pages/Product'
 import Store from './pages/Store';
-// import Signup from './pages/Signup'
-// import Login from './pages/Login'
+import Signup from './pages/Signup'
+import Login from './pages/Login'
 import Header from './components/Header'
 // import Footer from './components/Footer'
 // import Success from './pages/Success';
@@ -69,6 +69,14 @@ function App() {
             <Route
               path='/products/:productId'
               element={<Product />}
+            />
+            <Route
+            path='/signup'
+            element={<Signup />}
+            />
+            <Route
+            path='/login'
+            element={<Login />}
             />
           </Routes>
         </Box>
