@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import { useParams } from "react-router-dom"
 import { useQuery } from "@apollo/client"
 import { Box, Button, Image, Text } from "@chakra-ui/react"
@@ -11,11 +11,11 @@ const Product = () => {
     })
     const product = data?.product || {}
 
-    var activeImage = 'https://placehold.co/400x500'
+    const [activeImage, setActiveImage] = useState('https://placehold.co/400x500')
 
     const imageSwap = (event) => {
         var clickedImage = event.target.src
-        activeImage = clickedImage
+        setActiveImage(clickedImage)
     }
 
     return (
