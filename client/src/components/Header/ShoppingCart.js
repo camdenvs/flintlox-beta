@@ -12,7 +12,8 @@ import {
     CardHeader,
     Card,
     CardBody,
-    useToast
+    useToast,
+    Link
 } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { FaTrash } from 'react-icons/fa'
@@ -93,7 +94,9 @@ const ShoppingCart = ({ cart, loading }) => {
     if (!Auth.loggedIn()) {
         return (
             <>
-                <Button _hover='none' bg='none' _focus={{ 'bg': 'none' }} onClick={onOpen} ref={btnRef} fontWeight={'700'} textColor={'#0F0F0F'} height={'auto'}>CART</Button>
+                <Link _hover='none' bg='none' _focus={{ 'bg': 'none' }} onClick={onOpen} ref={btnRef} fontWeight={'700'} textColor={'#0F0F0F'} height={'auto'} textAlign={'center'}>
+                    <Text>CART</Text>
+                </Link>
                 <Drawer
                     isOpen={isOpen}
                     placement='right'
@@ -113,7 +116,9 @@ const ShoppingCart = ({ cart, loading }) => {
 
     return (
         <>
-            <Button _hover='none' bg='none' _focus={{ 'bg': 'none' }} onClick={onOpen} ref={btnRef} fontWeight={'700'} textColor={'#0F0F0F'} height={'auto'}>CART</Button>
+            <Link _hover='none' bg='none' _focus={{ 'bg': 'none' }} onClick={onOpen} ref={btnRef} fontWeight={'700'} textColor={'#0F0F0F'} height={'auto'} textAlign={'center'}>
+                    <Text>CART</Text>
+            </Link>            
             <Drawer
                 isOpen={isOpen}
                 placement='right'
