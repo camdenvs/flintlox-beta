@@ -14,14 +14,14 @@ const Home = () => {
             zIndex={'1'}
             isolation={'isolate'}
         >
-            <Image src='https://placehold.co/600x400'/>
+            <Image width={{"base": "100%", "md": "50%"}} src='/images/flintlox_drop.jpg'/>
             <Box 
                 margin={'25px 0px'}
                 display={'flex'} 
                 flexDirection={'column'} 
                 alignItems={'center'}
             >
-                <Heading textTransform={'uppercase'}>New things to come</Heading>
+                <Heading textTransform={'uppercase'} textAlign={'center'}>New things to come</Heading>
                 <Text>Next product drop in: </Text>
             </Box>
             <Box
@@ -38,7 +38,7 @@ const Home = () => {
                     margin={{'base': '10px'}}
                 >
                     <Link as={ReactLink} to='/store/wallets'><Image src={'https://placehold.co/240x160'}/></Link>
-                    <Text width={'200px'} textAlign={'center'}>Shop our currently available wallets</Text>
+                    <Text width={{"base": '80%', "md": '200px'}} textAlign={'center'}>Shop our currently available wallets</Text>
                 </Box>
                 <Box
                     display={'flex'}
@@ -47,7 +47,7 @@ const Home = () => {
                     margin={{'base': '10px'}}
                 >
                     <Link as={ReactLink} to='/store/bags'><Image src='https://placehold.co/240x160'/></Link>
-                    <Text width={'200px'} textAlign={'center'}>Shop our currently available bags</Text>
+                    <Text width={{"base": '80%', "md": '200px'}} textAlign={'center'}>Shop our currently available bags</Text>
                 </Box>
                 <Box 
                     display={'flex'}
@@ -56,7 +56,7 @@ const Home = () => {
                     margin={{'base': '10px'}}
                 >
                     <Link as={ReactLink} to='/store'><Image src='https://placehold.co/240x160'/></Link>
-                    <Text width={'200px'} textAlign={'center'}>Shop our currently available keychains, trays, notebooks, and more.</Text>
+                    <Text width={{"base": '80%', "md": '200px'}} textAlign={'center'}>Shop our currently available keychains, trays, notebooks, and more.</Text>
                 </Box>
             </Box>
         </Box>

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, Image, Box, Heading, Text, Button } from '@chakra-ui/react'
-import { Link as ReactLink } from 'react-router-dom'
+import { Link as ReactLink, useLocation } from 'react-router-dom'
 import { FaChevronDown } from 'react-icons/fa'
 import Auth from '../../utils/auth'
 import ShoppingCart from './ShoppingCart'
@@ -10,6 +10,12 @@ import { QUERY_CART } from '../../utils/queries'
 
 const Header = () => {
     const [navbarOpen, setNavbarOpen] = useState(false)
+    const pathname = useLocation()
+
+    useEffect(() => {
+        setNavbarOpen(false); // Close the navigation panel
+      }, [ pathname ])
+
     const logout = (event) => {
         event.preventDefault()
         Auth.logout()
