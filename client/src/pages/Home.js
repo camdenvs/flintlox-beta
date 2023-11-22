@@ -14,7 +14,7 @@ const Home = () => {
             zIndex={'1'}
             isolation={'isolate'}
         >
-            <Image width={{"base": "100%", "md": "50%"}} src='/images/flintlox_drop.jpg'/>
+            <Image width={{"base": "100%", "md": "95%"}} height={'90vh'} objectFit={'cover'} src='/images/flintlox_drop.jpg'/>
             <Box 
                 margin={'25px 0px'}
                 display={'flex'} 
