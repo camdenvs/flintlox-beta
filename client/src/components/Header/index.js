@@ -58,9 +58,9 @@ const Header = () => {
                 <Box width={{ 'base': '64px', 'md': '75px' }} textAlign={'center'}>
 
                     {Auth.loggedIn() ? (
-                        <Link onClick={logout} textDecoration={'none'}>Logout</Link>
+                        <Link onClick={logout} textDecoration={'none'} display={{'base': 'none', 'md': 'inline'}}>Logout</Link>
                     ) : (
-                        <Link as={ReactLink} to='/login'>Login</Link>
+                        <Link as={ReactLink} to='/login' display={{'base': 'none', 'md': 'inline'}}>Login</Link>
                     )}
                     
                     {Auth.loggedIn() ? (
@@ -122,6 +122,11 @@ const Header = () => {
                 <Link as={ReactLink} margin={'0px 15px'} to='/imperfect'>Imperfect Items</Link>
                 <Link as={ReactLink} margin={'0px 15px'} to='/about'>About Us</Link>
                 <Link as={ReactLink} margin={'0px 15px'} to='/contact'>Contact</Link>
+                {Auth.loggedIn() ? (
+                        <Link onClick={logout} textDecoration={'none'} margin={'0px 15px'}>Logout</Link>
+                    ) : (
+                        <Link as={ReactLink} margin={'0px 15px'} to='/login'>Login</Link>
+                    )}
             </Box>
         </Box>
     )
