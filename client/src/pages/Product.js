@@ -1,8 +1,11 @@
 import React, {useState} from "react"
 import { useParams } from "react-router-dom"
-import { useQuery } from "@apollo/client"
-import { Box, Button, Image, Text } from "@chakra-ui/react"
+import { useMutation, useQuery } from "@apollo/client"
+import { Box, Button, Image, Text, useToast } from "@chakra-ui/react"
 import { QUERY_SINGLE_PRODUCT } from "../utils/queries"
+import { ADD_TO_CART } from "../utils/mutations"
+
+import Auth from '../utils/auth'
 
 const Product = () => {
     const { productId } = useParams()
@@ -11,11 +14,41 @@ const Product = () => {
     })
     const product = data?.product || {}
 
-    const [activeImage, setActiveImage] = useState('https://placehold.co/400x500')
+    console.log(product)
+
+    const [activeImage, setActiveImage] = useState(product.images ? product.images[0] : '')
 
     const imageSwap = (event) => {
         var clickedImage = event.target.src
         setActiveImage(clickedImage)
+    }
+
+    const [addToCart] = useMutation(ADD_TO_CART)
+    const toast = useToast()
+    const [itemState, setItemState] = useState({ productId: productId, quantity: 1 })
+
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            await addToCart({
+                variables: {
+                    userId: Auth.getProfile().data._id,
+                    productId: itemState.productId,
+                    quantity: Number(itemState.quantity)
+                }
+            })
+            window.location.reload(false)
+        }
+        catch (e) {
+            toast({
+                title: `Couldn't add to cart.`,
+                description: `Make sure you are logged in.`,
+                status: 'error',
+                duration: 3000,
+                isClosable: true
+            })
+        }
     }
 
     return (
@@ -35,7 +68,7 @@ const Product = () => {
                         <Box display={'flex'} justifyContent={'space-evenly'}>
                             <Box>
                                 {product.images.map((image) => (
-                                    <Image src={image} padding={'15px 0px'} onClick={imageSwap}/>
+                                    <Image src={image} padding={'15px 0px'} onClick={imageSwap} key={image}/>
                                 ))}
                             </Box>
                             <Image src={activeImage} />
@@ -47,7 +80,7 @@ const Product = () => {
                             {product.description}
                         </Text>
                         <Box paddingBottom={'35px'}>
-                            <Button width={'120px'}>Add to Cart</Button>
+                            <Button width={'120px'} onClick={handleFormSubmit}>Add to Cart</Button>
                             <Text paddingLeft={'10px'}>{product.availableCount} available</Text>
                         </Box>
                     </Box>
