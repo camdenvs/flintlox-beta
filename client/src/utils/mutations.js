@@ -24,6 +24,14 @@ export const CREATE_USER = gql`
   }
 `;
 
+export const ADD_TO_NEWSLETTER = gql`
+  mutation addToNewsletter($email: String!) {
+    addToNewsletter(email: $email) {
+      _id
+      email
+    }
+  }
+`;
 
 export const CREATE_PRODUCT = gql`
   mutation createProduct($name: String!, $price: Int!, $description: String!, $image: String!, $category: String!, $sizes: String) {
