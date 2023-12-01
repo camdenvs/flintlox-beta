@@ -18,6 +18,7 @@ import Header from './components/Header'
 // import Footer from './components/Footer'
 // import Success from './pages/Success';
 import { Box } from '@chakra-ui/react';
+import Footer from './components/Footer';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -79,6 +80,7 @@ function App() {
             element={<Login />}
             />
           </Routes>
+          <Footer />
         </Box>
       </Router>
     </ApolloProvider>

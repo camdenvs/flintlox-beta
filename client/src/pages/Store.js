@@ -21,11 +21,11 @@ const Store = () => {
                     {products &&
                         products.length > 0 ?
                         (products.map((product) => (
-                            <Card border={'1px'} borderColor={'blackAlpha.300'} w={{ "sm": "100%", "md": "360px" }} mb='5' _hover={{ boxShadow: '2xl', width: '385px' }} transition={'0.3s'} key={product._id}>
+                            <Card border={'1px'} borderColor={'blackAlpha.300'} w={{ "sm": "100%", "md": "360px" }} mb='5' _hover={{'base': {}, 'md': { boxShadow: '2xl', width: '385px' }}} transition={'0.3s'} key={product._id}>
                                 <Link href={`/products/${product._id}`} _hover={'none'}>
                                     <Center><CardHeader fontSize={'32px'} pb='0'>{product.name}</CardHeader></Center>
                                     <CardBody>
-                                        <Image src={`images/products/${product.image}`} w='300px' h='300px' mx='auto'></Image>
+                                        <Image src={product.images ? `images/products/${product.images[0]}` : ''} w='300px' h='300px' mx='auto'></Image>
                                         <Center><Text fontSize={'18px'} mt='3'>${product.price}</Text></Center>
                                     </CardBody>
                                 </Link>
