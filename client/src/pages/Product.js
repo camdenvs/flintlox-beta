@@ -31,6 +31,7 @@ const Product = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
+            setItemState({ productId: productId, quantity: 1 })
             await addToCart({
                 variables: {
                     userId: Auth.getProfile().data._id,
