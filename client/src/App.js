@@ -80,7 +80,7 @@ function App() {
             element={<Login />}
             />
           </Routes>
-          <Footer />
+          {/* <Footer /> */}
         </Box>
       </Router>
     </ApolloProvider>
