@@ -86,7 +86,7 @@ const Header = () => {
                 <Link as={ReactLink} margin={'0px 15px'} to='/category/apparel'>Apparel</Link>
                 <Link as={ReactLink} margin={'0px 15px'} to='/store/imperfect'>Imperfect Items</Link>
                 <Link as={ReactLink} margin={'0px 15px'} to='/about'>About Us</Link>
-                <Link as={ReactLink} margin={'0px 15px'} to='/contact'>Contact</Link>
+                {/* <Link as={ReactLink} margin={'0px 15px'} to='/contact'>Contact</Link> */}
             </Box>
             <Box
                 display={{ 'base': 'flex', 'md': 'none' }}
