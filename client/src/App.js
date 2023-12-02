@@ -18,6 +18,7 @@ import Header from './components/Header'
 // import Footer from './components/Footer'
 // import Success from './pages/Success';
 import { Box } from '@chakra-ui/react';
+import About from './pages/About';
 // import Footer from './components/Footer';
 
 // Construct our main GraphQL API endpoint
@@ -70,6 +71,10 @@ function App() {
             <Route
               path='/products/:productId'
               element={<Product />}
+            />
+            <Route
+            path='/about'
+            element={<About />}
             />
             <Route
             path='/signup'
