@@ -83,7 +83,7 @@ return (
                 alignItems={'center'}
                 margin={{ 'base': '10px' }}
             >
-                <Link as={ReactLink} to='/store/wallets'><Image src={'https://placehold.co/240x160'} /></Link>
+                <Link as={ReactLink} to='/store/wallets'><Image width={'360px'} src={'images/Wallets.jpg'} /></Link>
                 <Text width={{ "base": '80%', "md": '200px' }} textAlign={'center'}>Shop our currently available wallets</Text>
             </Box>
             <Box
@@ -92,7 +92,7 @@ return (
                 alignItems={'center'}
                 margin={{ 'base': '10px' }}
             >
-                <Link as={ReactLink} to='/store/bags'><Image src='https://placehold.co/240x160' /></Link>
+                <Link as={ReactLink} to='/store/bags'><Image width={'360px'} src='images/Bags.jpg' /></Link>
                 <Text width={{ "base": '80%', "md": '200px' }} textAlign={'center'}>Shop our currently available bags</Text>
             </Box>
             <Box
@@ -101,7 +101,7 @@ return (
                 alignItems={'center'}
                 margin={{ 'base': '10px' }}
             >
-                <Link as={ReactLink} to='/store'><Image src='https://placehold.co/240x160' /></Link>
+                <Link as={ReactLink} to='/store'><Image width={'360px'} src='images/Accessories.jpg'/></Link>
                 <Text width={{ "base": '80%', "md": '200px' }} textAlign={'center'}>Shop our currently available keychains, trays, notebooks, and more.</Text>
             </Box>
         </Box>

@@ -20,35 +20,35 @@ const Category = () => {
                     <Box display={{'base': 'none', 'md': 'inline'}}>
                         <Heading padding={'50px 0px'} fontSize={'24px'}  width='100%' textAlign='right'>Leather</Heading>
                         <Box display={'flex'} margin={'15px 0px'}>
-                            <Link as={ReactLink} to='/store/wallets'><Image src={'https://placehold.co/240x160'}/></Link>
+                            <Link as={ReactLink} to='/store/wallets'><Image width={'240px'} src={'/images/product/StocktonWallet/TwoToneDerby/20231130_151154.jpg'}/></Link>
                             <Text padding={'10px'}>Wallets</Text>
                         </Box>
                         <Box display={'flex'} margin={'15px 0px'}>
-                            <Link as={ReactLink} to='/store/keychains'><Image src={'https://placehold.co/240x160'}/></Link>
+                            <Link as={ReactLink} to='/store/keychains'><Image width={'240px'} src={'/images/product/BTKKeych/Black/20231130_110023.jpg'}/></Link>
                             <Text padding={'10px'}>Keychains</Text>
                         </Box>
                         <Box display={'flex'} margin={'15px 0px'}>
-                            <Link as={ReactLink} to='/store/other-leather'><Image src={'https://placehold.co/240x160'}/></Link>
+                            <Link as={ReactLink} to='/store/other-leather'><Image width={'240px'} src={'/images/product/WilliamLeeTray/BlackTan/20231130_110615.jpg'}/></Link>
                             <Text padding={'10px'}>Other</Text>
                         </Box>
                     </Box>
                     
                     <Box padding={{'base': '25px', 'md': '150px 0px'}}>
                         <Heading display={{'base': 'block', 'md': 'none'}} textAlign={'center'} fontSize={'24px'} margin={'15px'}>Leather</Heading>
-                        <Image width={{'base': '100%', 'md': 'auto'}}src={'https://placehold.co/400x500'} />
+                        <Image width={{'base': '100%', 'md': '600px'}} src={'/images/product/NathanHaleNoteWallet/Derby/20231130_114401.jpg'} />
                     </Box>
 
                     <Box display={{'base': 'flex', 'md': 'none'}} flexDirection={'column'} alignItems={'center'}>
                         <Box margin={'15px 0px'}>
                             <Text padding={'10px'}>Wallets</Text>
-                            <Link as={ReactLink} to='/store/wallets'><Image src={'https://placehold.co/240x160'}/></Link>
+                            <Link as={ReactLink} to='/store/wallets'><Image width={'240px'} src={'/images/product/StocktonWallet/TwoToneDerby/20231130_151154.jpg'}/></Link>
                         </Box>
                         <Box margin={'15px 0px'}>
                             <Text padding={'10px'}>Keychains</Text>
-                            <Link as={ReactLink} to='/store/keychains'><Image src={'https://placehold.co/240x160'}/></Link></Box>
+                            <Link as={ReactLink} to='/store/keychains'><Image width={'240px'} src={'/images/product/BTKKeych/Black/20231130_110023.jpg'}/></Link></Box>
                         <Box margin={'15px 0px'}>
                             <Text padding={'10px'}>Other</Text>
-                            <Link as={ReactLink} to='/store/other-leather'><Image src={'https://placehold.co/240x160'}/></Link>
+                            <Link as={ReactLink} to='/store/other-leather'><Image width={'240px'} src={'/images/product/WilliamLeeTray/BlackTan/20231130_110615.jpg'}/></Link>
                         </Box>
                     </Box>
                 </Box>
@@ -61,7 +61,8 @@ const Category = () => {
                     zIndex={'1'}
                     isolation={'isolate'}
                 >
-                    <Box display={{'base': 'none', 'md': 'inline'}}>
+                    <Heading>Coming Very Soon...</Heading>
+                    {/* <Box display={{'base': 'none', 'md': 'inline'}}>
                         <Heading padding={'50px 0px'} fontSize={'24px'} width='100%' textAlign='right'>Apparel</Heading>
                         <Box display={'flex'} margin={'15px 0px'}>
                             <Link as={ReactLink} to='/store/t-shirts'><Image src={'https://placehold.co/240x160'}/></Link>
@@ -94,7 +95,7 @@ const Category = () => {
                             <Text padding={'10px'}>Other</Text>
                             <Link as={ReactLink} to='/store/other-apparel'><Image src={'https://placehold.co/240x160'}/></Link>
                         </Box>
-                    </Box>
+                    </Box> */}
                 </Box>
                 
             )}
