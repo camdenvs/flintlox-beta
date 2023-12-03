@@ -70,6 +70,7 @@ export const QUERY_CART = gql`
       userId
       items {
         _id
+        image
         name
         stripeProductId
         price

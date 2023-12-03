@@ -42,10 +42,10 @@ const resolvers = {
             const line_items = []
 
             for (let item of cart.items) {
-                const stripeProduct = await stripe.products.retrieve(product.stripeProductId)
+                const stripeProduct = await stripe.products.retrieve(item.stripeProductId)
                 line_items.push({
                     price: stripeProduct.default_price,
-                    quantity: item.quantity
+                    quantity: 1
                 })
             }
 
@@ -103,7 +103,7 @@ const resolvers = {
 
             return { token, user };
         },
-        addToCart: async (parent, { userId, name, stripeProductId, price }) => {
+        addToCart: async (parent, { userId, image, name, stripeProductId, price }) => {
             const cart = await Cart.findOne({ userId: userId })
             if (cart) {
                 return await Cart.findOneAndUpdate(
@@ -111,6 +111,7 @@ const resolvers = {
                     {
                         $addToSet: {
                             items: {
+                                image: image,
                                 name: name,
                                 stripeProductId: stripeProductId,
                                 price: price

@@ -13,7 +13,8 @@ import {
     Card,
     CardBody,
     useToast,
-    Link
+    Link,
+    Image
 } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { FaTrash } from 'react-icons/fa'
@@ -136,15 +137,11 @@ const ShoppingCart = ({ cart, loading }) => {
                                     cart.items.map((item) => (
                                         <Card key={item._id} m='3'>
                                             <CardHeader pb='1' fontSize={'20px'} fontWeight={600} display={'flex'} justifyContent={'space-between'}>
-                                                <Text>{item.name} x {item.quantity}</Text>
+                                                <Text>{item.name}</Text>
                                                 <Button fontSize={'12px'} colorScheme='red' value={item._id} onClick={handleRemoveItem}><FaTrash /></Button>
                                             </CardHeader>
                                             <CardBody pt='1'>
-                                                {item.size ? (
-                                                    <Text fontWeight={300}>{item.size}</Text>
-                                                ) : (
-                                                    <></>
-                                                )}
+                                                <Image src={item.image} />
                                                 <Text fontWeight={300}>${item.price}</Text>
                                             </CardBody>
                                         </Card>

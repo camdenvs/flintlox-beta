@@ -44,6 +44,7 @@ const Product = () => {
             await addToCart({
                 variables: {
                     userId: Auth.getProfile().data._id,
+                    image: product.thumbnail,
                     name: `${product.name} - ${activeVariant.name}`,
                     stripeProductId: activeVariant.stripeProductId,
                     price: product.price
