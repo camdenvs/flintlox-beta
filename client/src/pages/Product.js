@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import { useParams } from "react-router-dom"
 import { useMutation, useQuery } from "@apollo/client"
 import { Box, Button, Image, Text, useToast } from "@chakra-ui/react"
@@ -13,10 +13,18 @@ const Product = () => {
         variables: { productId: productId }
     })
     const product = data?.product || {}
+    console.log(error)
 
-    console.log(product)
+    const [activeVariant, setActiveVariant] = useState({})
 
-    const [activeImage, setActiveImage] = useState(product.images ? product.images[0] : '')
+    const [activeImage, setActiveImage] = useState('')
+    
+    useEffect(() => {
+        if (!loading) {
+            setActiveVariant(product.variants[0])
+            setActiveImage(`/images/product/${activeVariant.images[0]}`)
+        }
+    }, [loading, activeVariant.images, product.variants])
 
     const imageSwap = (event) => {
         var clickedImage = event.target.src
@@ -25,18 +33,15 @@ const Product = () => {
 
     const [addToCart] = useMutation(ADD_TO_CART)
     const toast = useToast()
-    const [itemState, setItemState] = useState({ productId: productId, quantity: 1 })
-
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            setItemState({ productId: productId, quantity: 1 })
             await addToCart({
                 variables: {
                     userId: Auth.getProfile().data._id,
-                    productId: itemState.productId,
-                    quantity: Number(itemState.quantity)
+                    stripeProductId: activeVariant.stripeProductId,
+                    price: product.price
                 }
             })
             window.location.reload(false)
@@ -67,12 +72,12 @@ const Product = () => {
                     <Box width={'60%'}>
                         <Text textAlign={'center'} paddingTop={'35px'}>{product.name}</Text>
                         <Box display={'flex'} justifyContent={'space-evenly'}>
-                            <Box>
+                            <Box width={'15%'}>
                                 {product.images.map((image) => (
-                                    <Image src={image} padding={'15px 0px'} onClick={imageSwap} key={image}/>
+                                    <Image src={`/images/product/${image}`} padding={'15px 0px'} onClick={imageSwap} key={image} _hover={{ cursor: 'pointer'}}/>
                                 ))}
                             </Box>
-                            <Image src={activeImage} />
+                            <Image width={'80%'} src={activeImage} />
                         </Box>
                     </Box>
                     <Box width={'30%'} display={'flex'} flexDirection={'column'} justifyContent={'space-evenly'}>

@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Product, Order, Cart, Category } = require('../models');
+const { User, Product, Order, Cart } = require('../models');
 const { signToken } = require('../utils/auth');
 require('dotenv').config()
 const stripe = require("stripe")(process.env.STRIPE_KEY)
@@ -42,7 +42,6 @@ const resolvers = {
             const line_items = []
 
             for (let item of cart.items) {
-                const product = await Product.findOne({ _id: item.productId })
                 const stripeProduct = await stripe.products.retrieve(product.stripeProductId)
                 line_items.push({
                     price: stripeProduct.default_price,
@@ -104,23 +103,19 @@ const resolvers = {
 
             return { token, user };
         },
-        addToCart: async (parent, { userId, productId, size, quantity }) => {
+        addToCart: async (parent, { userId, stripeProductId, price }) => {
             const cart = await Cart.findOne({ userId: userId })
-            const item = await Product.findOne({ _id: productId })
             if (cart) {
                 return await Cart.findOneAndUpdate(
                     { userId: userId },
                     {
                         $addToSet: {
                             items: {
-                                productId: productId,
-                                name: item.name,
-                                size: size,
-                                quantity: quantity,
-                                price: item.price*quantity
+                                stripeProductId: stripeProductId,
+                                price: price
                             }
                         },
-                        $set: { total: cart.total + (quantity*item.price) }
+                        $set: { total: cart.total + price }
                     },
                     {
                       new: true,
@@ -131,8 +126,8 @@ const resolvers = {
             else{
                 return await Cart.create({
                     userId: userId,
-                    items: [{ productId, name: item.name, quantity, price: item.price, size }],
-                    total: quantity*item.price
+                    items: [{ stripeProductId: stripeProductId, price: price}],
+                    total: price
                 })
             }
         },

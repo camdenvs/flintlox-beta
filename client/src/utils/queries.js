@@ -6,11 +6,9 @@ export const QUERY_PRODUCTS = gql`
       _id
       name
       price
-      description
-      images
       subcategory
-      availableCount
       releaseDate
+      thumbnail
     }
   }
 `;
@@ -21,11 +19,17 @@ export const QUERY_SINGLE_PRODUCT = gql`
       _id
       name
       price
-      description
-      images
+      variants {
+        _id
+        name
+        stripeProductId
+        description
+        images
+        availableCount
+      }
       subcategory
-      availableCount
       releaseDate
+      thumbnail
     }
   }
 `;
