@@ -141,7 +141,7 @@ const ShoppingCart = ({ cart, loading }) => {
                                                 <Button fontSize={'12px'} colorScheme='red' value={item._id} onClick={handleRemoveItem}><FaTrash /></Button>
                                             </CardHeader>
                                             <CardBody pt='1'>
-                                                <Image src={item.image} />
+                                                <Image src={`/images/product/${item.image}`} />
                                                 <Text fontWeight={300}>${item.price}</Text>
                                             </CardBody>
                                         </Card>
