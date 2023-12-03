@@ -71,13 +71,14 @@ export const UPLOAD_FILE = gql`
 `
 
 export const ADD_TO_CART = gql`
-  mutation addToCart($userId: ID!, $stripeProductId: ID!, $price: Int!) {
-    addToCart(userId: $userId, stripeProductId: $stripeProductId, price: $price) {
+  mutation addToCart($userId: ID!, $stripeProductId: String!, $price: Int!, $name: String!) {
+    addToCart(userId: $userId, stripeProductId: $stripeProductId, price: $price, name: $name) {
       _id
       userId
       items {
+        name
         stripeProductId
-        Price
+        price
       }
       total
     }
@@ -90,10 +91,9 @@ export const REMOVE_FROM_CART = gql`
       _id
       userId
       items {
-        productId
+        _id
         name
-        size
-        quantity
+        stripeProductId
         price
       }
       total

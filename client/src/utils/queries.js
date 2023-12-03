@@ -52,10 +52,9 @@ export const QUERY_ORDERS = gql`
       _id
       userId
       items {
-        productId
+        _id
         name
-        size
-        quantity
+        stripeProductId
         price
       }
       total
@@ -71,10 +70,8 @@ export const QUERY_CART = gql`
       userId
       items {
         _id
-        productId
         name
-        size
-        quantity
+        stripeProductId
         price
       }
       total

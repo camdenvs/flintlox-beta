@@ -36,6 +36,7 @@ const typeDefs = gql`
 
     type Item {
         _id: ID
+        name: String
         stripeProductId: ID
         price: Int
     }
@@ -76,7 +77,7 @@ const typeDefs = gql`
         removeProduct(productId: ID!): Product
         createUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
-        addToCart(userId: ID!, stripeProductId: String!, price: Int!): Cart
+        addToCart(userId: ID!, name: String!, stripeProductId: String!, price: Int!): Cart
         removeFromCart(userId: ID!, itemId: ID!): Cart
         clearCart(userId: ID!): Cart
     }

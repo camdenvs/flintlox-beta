@@ -103,7 +103,7 @@ const resolvers = {
 
             return { token, user };
         },
-        addToCart: async (parent, { userId, stripeProductId, price }) => {
+        addToCart: async (parent, { userId, name, stripeProductId, price }) => {
             const cart = await Cart.findOne({ userId: userId })
             if (cart) {
                 return await Cart.findOneAndUpdate(
@@ -111,6 +111,7 @@ const resolvers = {
                     {
                         $addToSet: {
                             items: {
+                                name: name,
                                 stripeProductId: stripeProductId,
                                 price: price
                             }
