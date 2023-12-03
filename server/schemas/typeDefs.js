@@ -15,24 +15,28 @@ const typeDefs = gql`
         isAdmin: Boolean
     }
 
+    type Variant {
+        _id: ID
+        name: String
+        images: [String]
+        description: String
+        stripeProductId: String
+        availableCount: Int
+    }
+
     type Product {
         _id: ID
         name: String
         price: Int
-        description: String
-        images: [String]
         subcategory: String
-        stripeProductId: String
-        availableCount: Int
         releaseDate: String
+        variants: [Variant]
+        thumbnail: String
     }
 
     type Item {
         _id: ID
-        productId: ID
-        name: String
-        size: String
-        quantity: Int
+        stripeProductId: ID
         price: Int
     }
 
@@ -72,7 +76,7 @@ const typeDefs = gql`
         removeProduct(productId: ID!): Product
         createUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
-        addToCart(userId: ID!, productId: ID!, size: String!, quantity: Int!): Cart
+        addToCart(userId: ID!, stripeProductId: String!, price: Int!): Cart
         removeFromCart(userId: ID!, itemId: ID!): Cart
         clearCart(userId: ID!): Cart
     }
