@@ -25,7 +25,7 @@ const Store = () => {
                                 <Link href={`/products/${product._id}`} _hover={'none'}>
                                     <Center><CardHeader fontSize={'32px'} pb='0'>{product.name}</CardHeader></Center>
                                     <CardBody>
-                                        <Image src={product.thumbnail ? `images/product/${product.thumbnail}` : ''} w='300px' h='300px' mx='auto'></Image>
+                                        <Image src={product.thumbnail ? `/images/product/${product.thumbnail}` : ''} w='300px' h='300px' mx='auto'></Image>
                                         <Center><Text fontSize={'18px'} mt='3'>${product.price}</Text></Center>
                                     </CardBody>
                                 </Link>
