@@ -35,6 +35,11 @@ const Product = () => {
         setActiveImage(clickedImage)
     }
 
+    const variantSwap = (event) => {
+        console.log(event.target.value)
+        setActiveVariant(product.variants[event.target.value])
+    }
+
     const [addToCart] = useMutation(ADD_TO_CART)
     const toast = useToast()
 
@@ -74,12 +79,13 @@ const Product = () => {
                     position={'relative'}
                     zIndex={'1'}
                     isolation={'isolate'}
+                    flexDirection={{'base': "column", 'md': "row"}}
                 >
-                    <Box width={'60%'}>
-                        <Text textAlign={'center'} paddingTop={'35px'}>{product.name}</Text>
+                    <Box width={{'base': '100%', 'md': '50%'}}>
+                        <Text textAlign={'center'} paddingTop={'35px'}>{product.name} - {activeVariant.name}</Text>
                         <Box display={'flex'} justifyContent={'space-evenly'}>
                             {activeVariant.images ? (
-                                <Box width={'15%'}>
+                                <Box width={'10%'}>
                                     {activeVariant.images.map((image) => (
                                         <Image src={`/images/product/${image}`} padding={'15px 0px'} onClick={imageSwap} key={image} _hover={{ cursor: 'pointer' }} />
                                     ))}
@@ -88,17 +94,23 @@ const Product = () => {
                                 <></>
                             )
                             }
-                            <Image width={'80%'} src={activeImage} />
+                            <Box width={'80%'} padding={'15px'}><Image src={activeImage} /></Box>
+                            
                         </Box>
                     </Box>
-                    <Box width={'30%'} display={'flex'} flexDirection={'column'} justifyContent={'space-evenly'}>
+                    <Box width={{'base': '100%', 'md': '30%'}} padding={{'base': '25px', 'md': 'nonw'}} display={'flex'} flexDirection={'column'}>
                         <Text paddingTop={'35px'} fontWeight={'600'} fontSize={'24px'}>Description</Text>
-                        <Text paddingTop={'15px'} height={'100%'}>
+                        <Text paddingTop={'15px'} paddingBottom={'20px'}>
                             {activeVariant.description}
                         </Text>
                         <Box paddingBottom={'35px'}>
                             <Button width={'120px'} onClick={handleFormSubmit}>Add to Cart</Button>
                             <Text paddingLeft={'10px'}>{activeVariant.availableCount} available</Text>
+                        </Box>
+                        <Box>
+                            {product.variants.map((variant, index) => (
+                                <Button border={'2px'} display={'inline'} margin={'5px'} onClick={variantSwap} fontWeight={'700'} key={variant.name} value={index} _hover={{'cursor': 'pointer'}}>{variant.name}</Button>
+                            ))}
                         </Box>
                     </Box>
                 </Box>
