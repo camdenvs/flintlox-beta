@@ -10,7 +10,7 @@ const About = () => {
             <Text paddingY={'10px'}>My son runs our website, my daughters take photos and run the social media accounts, and my wife gives my products a critical eye, and gives me all the support I need.</Text>
             <Text paddingY={'10px'}>Our plan is to create new products every few weeks to a month - some repeats, some updates on previous products, and some new. We'll announce the product drops, and hopefully people will like them enough to purchase.</Text>
 
-            <Text paddingY={'10px'}>We're using top quality leathers from tanneries like Horween and Sidel in the USA, Conceria Walpier in Italy, and Shinki Hadaku in Japan. We use Ritza Tiger waxed polyester thread, and we're hand stitching everything.</Text>
+            <Text paddingY={'10px'}>We're using top quality leathers from tanneries like Horween and Sidel in the USA, Conceria Walpier in Italy, and Shinki Hikaku in Japan. We use Ritza Tiger waxed polyester thread, and we're hand stitching everything.</Text>
 
             <Text paddingY={'10px'}>We're not trying to compete with most leather goods available in department stores, which barely contain any leather at all. We want rugged, rustic, eye-catching pieces that become more beautiful over time with patina. The kind of items you'll want to collect, and your kids will want to inherit.</Text>
         </Box>

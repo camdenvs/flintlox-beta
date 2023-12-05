@@ -103,6 +103,7 @@ const Product = () => {
                         <Text paddingTop={'15px'} paddingBottom={'20px'}>
                             {activeVariant.description}
                         </Text>
+                        <Text paddingTop={'35px'} fontWeight={'600'} fontSize={'24px'}>${product.price}.00</Text>
                         <Box paddingBottom={'35px'}>
                             <Button width={'120px'} onClick={handleFormSubmit}>Add to Cart</Button>
                             <Text paddingLeft={'10px'}>{activeVariant.availableCount} available</Text>
