@@ -1,18 +1,41 @@
 import React, { useEffect } from 'react'
 import { Box, Center, Container, Text } from '@chakra-ui/react'
-import { CLEAR_CART } from '../utils/mutations'
+import { ADD_ORDER } from '../utils/mutations'
 import { useMutation } from '@apollo/client'
 import Auth from '../utils/auth'
 
-const Success = () => {
-    const [clearCart] = useMutation(CLEAR_CART, {variables: {userId: Auth.getProfile().data._id}})
-    
+
+const Success = ({ setCart }) => {
+    const addOrder = useMutation(ADD_ORDER)
+    const items = JSON.parse(window.localStorage.getItem('cart')).items
+
+    const invoice = JSON.parse(window.localStorage.getItem('invoiceId'))
+    let stripeProductIds = []
+
+    for (let i = 0; i < items.length; i++) {
+        stripeProductIds.push(items[i].stripeProductId)
+    }
+    if (Auth.loggedIn()) {
+        try {
+            addOrder({
+                variables: {
+                    userId: Auth.getProfile().data._id,
+                    stripeProductIds: stripeProductIds,
+                    invoice: invoice
+                }
+            })
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     useEffect(() => {
         setTimeout(() => {
             window.location.assign('/');
         }, 3000);
-        clearCart()
-    }, [clearCart]);
+        setCart(window.localStorage.setItem('cart', JSON.stringify({ items: [], total: 0})))
+    }, [setCart]);
+
     return (
         <Box
             bgImage={"url('/assets/images/bckgrnd-banner1.jpg')"}

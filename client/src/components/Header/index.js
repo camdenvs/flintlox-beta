@@ -5,10 +5,7 @@ import { FaChevronDown } from 'react-icons/fa'
 import Auth from '../../utils/auth'
 import ShoppingCart from './ShoppingCart'
 
-import { useQuery } from '@apollo/client'
-import { QUERY_CART } from '../../utils/queries'
-
-const Header = () => {
+const Header = (props) => {
     const [navbarOpen, setNavbarOpen] = useState(false)
     const pathname = useLocation()
 
@@ -20,10 +17,6 @@ const Header = () => {
         event.preventDefault()
         Auth.logout()
     }
-
-    const userId = Auth.loggedIn() ? Auth.getProfile().data._id : undefined
-    const { loading, data } = useQuery(QUERY_CART, { variables: { userId: userId } })
-    const cart = data?.cart || {}
 
     const toggleNav = (event) => {
         event.preventDefault()
@@ -63,11 +56,7 @@ const Header = () => {
                         <Link as={ReactLink} to='/login' display={{'base': 'none', 'md': 'inline'}}>Login</Link>
                     )}
                     
-                    {Auth.loggedIn() ? (
-                        <ShoppingCart cart={cart} loading={loading} />
-                    ) : (
-                        <ShoppingCart />
-                    )}
+                    <ShoppingCart cart={props.cart} setCart={props.setCart} />
                     
                 </Box>
             </Box>

@@ -35,14 +35,11 @@ const resolvers = {
         cart: async (parent, { userId }) => {
             return await Cart.findOne({ userId: userId })
         },
-        checkout: async (parent, { cartId }, context) => {
-            const cart = await Cart.findOne({ _id: cartId })
-            const url = new URL(context.headers.referer).origin
-
+        checkout: async (parent, { items }, context) => {
             const line_items = []
 
-            for (let item of cart.items) {
-                const stripeProduct = await stripe.products.retrieve(item.stripeProductId)
+            for (let item of items) {
+                const stripeProduct = await stripe.products.retrieve(item)
                 line_items.push({
                     price: stripeProduct.default_price,
                     quantity: 1
@@ -60,7 +57,6 @@ const resolvers = {
                 cancel_url: `${url}/`,
                 
             })
-            
 
             return { session: session.id }
         }
@@ -154,6 +150,22 @@ const resolvers = {
         clearCart: async (parent, { userId }) => {
             return await Cart.findOneAndDelete(
                 { userId: userId }
+            )
+        },
+        addOrder: async (parent, { userId, stripeProductIds }) => {
+            const user = await User.findOne({ userId: userId })
+            const order = await Order.create({ userId: userId, items: stripeProductIds })
+
+            return await user.updateOne(
+                {
+                    $push: {
+                        orders: order._id
+                    }
+                },
+                {
+                  new: true,
+                  runValidators: true,
+                }
             )
         }
     }

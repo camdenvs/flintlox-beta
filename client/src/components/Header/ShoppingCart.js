@@ -18,19 +18,16 @@ import {
 } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { FaTrash } from 'react-icons/fa'
-import { REMOVE_FROM_CART, CLEAR_CART } from '../../utils/mutations'
 import { CHECKOUT } from '../../utils/queries'
-import { useMutation, useLazyQuery } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import Auth from '../../utils/auth'
 import { loadStripe } from "@stripe/stripe-js"
 
 
-const ShoppingCart = ({ cart, loading }) => {
+const ShoppingCart = ({ cart, setCart }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
     const toast = useToast()
-    const [removeItem] = useMutation(REMOVE_FROM_CART)
-    const [clearCart] = useMutation(CLEAR_CART)
     const [checkout, { data }] = useLazyQuery(CHECKOUT)
 
     const stripePromise = loadStripe(
@@ -39,7 +36,7 @@ const ShoppingCart = ({ cart, loading }) => {
 
     useEffect(() => {
         if (data) {
-            localStorage.setItem('sessionId', data.checkout.session)
+            localStorage.setItem('invoiceId', data.checkout.session.invoice)
             stripePromise.then((res) => {
                 res.redirectToCheckout({ sessionId: data.checkout.session });
             });
@@ -47,79 +44,57 @@ const ShoppingCart = ({ cart, loading }) => {
     }, [data, stripePromise]);
 
     const handleRemoveItem = async (event) => {
-        const itemId = await event.target.value
-        const userId = await Auth.getProfile().data._id
-        try {
-        await removeItem({
-            variables: {
-                itemId: itemId,
-                userId: userId
+        const name = event.target.value
+        const items = cart.items
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].name === name) {
+                try {
+                    const removedItem = items.splice(i, 1)
+                    console.log(removedItem)
+                    await setCart({items: items, total: cart.total - Number(removedItem[0].price)})
+                }
+                catch {
+                    toast({
+                        title: `There was an error removing that item.`,
+                        description: `Reload and try again`,
+                        status: 'error',
+                        duration: 3000,
+                        isClosable: true
+                    })
+                }
+                return
             }
-        })
-        window.location.reload()
         }
-        catch {
-            toast({
-                title: `There was an error removing that item.`,
-                description: `Reload and try again`,
-                status: 'error',
-                duration: 3000,
-                isClosable: true
-            })
-        }
+
+
     }
 
     const handleClearCart = async () => {
-        await clearCart({
-            variables: {
-                userId: Auth.getProfile().data._id
-            }
-        })
-        window.location.reload()
+        await await setCart({items: [], total: 0})
     }
 
     const handleCheckout = async (event) => {
         event.preventDefault()
+        let stripeIds = []
+        for (var i = 0; i < cart.items.length; i++) {
+            stripeIds.push(cart.items[i].stripeProductId)
+        }
         try {
             checkout({
                 variables: {
-                    cartId: cart._id
+                    items: stripeIds
                 }
             })
         } catch (err) {
             console.log("Error:", err)
         }
-        
-    }
-
-    if (!Auth.loggedIn()) {
-        return (
-            <>
-                <Link _hover='none' bg='none' _focus={{ 'bg': 'none' }} onClick={onOpen} ref={btnRef} fontWeight={'700'} textColor={'#0F0F0F'} height={'auto'} textAlign={'center'}>
-                    <Text>CART</Text>
-                </Link>
-                <Drawer
-                    isOpen={isOpen}
-                    placement='right'
-                    onClose={onClose}
-                    finalFocusRef={btnRef}
-                >
-                    <DrawerOverlay />
-                    <DrawerContent>
-                        <DrawerCloseButton />
-                        <DrawerHeader>Shopping Cart</DrawerHeader>
-                        <DrawerBody>You need to be logged in to use the shopping cart.</DrawerBody>
-                    </DrawerContent>
-                </Drawer>
-            </>
-        )
     }
 
     return (
         <>
             <Link _hover='none' bg='none' _focus={{ 'bg': 'none' }} onClick={onOpen} ref={btnRef} fontWeight={'700'} textColor={'#0F0F0F'} height={'auto'} textAlign={'center'}>
-                    <Text>CART</Text>
-            </Link>            
+                <Text>CART</Text>
+            </Link>
             <Drawer
                 isOpen={isOpen}
                 placement='right'
@@ -130,15 +105,15 @@ const ShoppingCart = ({ cart, loading }) => {
                 <DrawerContent>
                     <DrawerCloseButton />
                     <DrawerHeader>Shopping Cart</DrawerHeader>
-                    {!loading && cart.items && cart.items.length > 0 ? (
+                    {cart.items && cart.items.length > 0 ? (
                         <>
                             <DrawerBody>
                                 {cart.items &&
                                     cart.items.map((item) => (
-                                        <Card key={item._id} m='3'>
+                                        <Card key={item.name} m='3'>
                                             <CardHeader pb='1' fontSize={'20px'} fontWeight={600} display={'flex'} justifyContent={'space-between'}>
                                                 <Text>{item.name}</Text>
-                                                <Button fontSize={'12px'} colorScheme='red' value={item._id} onClick={handleRemoveItem}><FaTrash /></Button>
+                                                <Button fontSize={'12px'} colorScheme='red' value={item.name} onClick={handleRemoveItem}><FaTrash /></Button>
                                             </CardHeader>
                                             <CardBody pt='1'>
                                                 <Image src={`/images/product/${item.image}`} />
@@ -153,9 +128,15 @@ const ShoppingCart = ({ cart, loading }) => {
                                 <Button variant='outline' mr={3} onClick={onClose}>
                                     Close
                                 </Button>
-                                <Button colorScheme='blue' mr={3} onClick={handleCheckout}>
-                                    Checkout
-                                </Button>
+                                {Auth.loggedIn() ? (
+                                    <Button colorScheme='blue' mr={3} onClick={handleCheckout}>
+                                        Checkout
+                                    </Button>
+                                ) : (
+                                    <Button fontSize={'12px'} colorScheme='blue' mr={3} onClick={handleCheckout}>
+                                        Checkout as Guest
+                                    </Button>
+                                )}
                                 <Button colorScheme='red' onClick={handleClearCart}>Clear</Button>
                             </DrawerFooter>
                         </>

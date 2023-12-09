@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   ApolloClient,
   InMemoryCache,
@@ -19,6 +19,8 @@ import Header from './components/Header'
 // import Success from './pages/Success';
 import { Box } from '@chakra-ui/react';
 import About from './pages/About';
+import { ShoppingCartContext } from './context/ShoppingCartContext';
+import Success from './pages/Success';
 // import Footer from './components/Footer';
 
 // Construct our main GraphQL API endpoint
@@ -46,48 +48,68 @@ const client = new ApolloClient({
 });
 
 function App() {
+  if (window.localStorage.getItem('cart') === null) {
+    window.localStorage.setItem('cart', JSON.stringify({ items: [], total: 0}))
+  }
+
+  const [cart, setCart] = useState(JSON.parse(window.localStorage.getItem('cart')))
+
+  useEffect(() => {
+    setCart(JSON.parse(window.localStorage.getItem('cart')))
+  }, [setCart])
+
+  useEffect(() => {
+    window.localStorage.setItem('cart', JSON.stringify(cart))
+  }, [cart, setCart])
+
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <Header />
-        <Box paddingTop={'130px'}>
-          <Routes>
-            <Route
-              path='/'
-              element={<Home />}
-            />
-            <Route
-              path={'/store'}
-              element={<Store />}
-            />
-            <Route
-              path={'/store/:subcategory'}
-              element={<Store />}
-            />
-            <Route
-              path={'/category/:category'}
-              element={<Category />}
-            />
-            <Route
-              path='/products/:productId'
-              element={<Product />}
-            />
-            <Route
-            path='/about'
-            element={<About />}
-            />
-            <Route
-            path='/signup'
-            element={<Signup />}
-            />
-            <Route
-            path='/login'
-            element={<Login />}
-            />
-          </Routes>
-          {/* <Footer /> */}
-        </Box>
-      </Router>
+      <ShoppingCartContext.Provider value={cart}>
+        <Router>
+          <Header cart={cart} setCart={setCart} />
+          <Box paddingTop={'130px'}>
+            <Routes>
+              <Route
+                path='/'
+                element={<Home />}
+              />
+              <Route
+                path={'/store'}
+                element={<Store />}
+              />
+              <Route
+                path={'/store/:subcategory'}
+                element={<Store />}
+              />
+              <Route
+                path={'/category/:category'}
+                element={<Category />}
+              />
+              <Route
+                path='/products/:productId'
+                element={<Product cart={cart} setCart={setCart} />}
+              />
+              <Route
+                path='/about'
+                element={<About />}
+              />
+              <Route
+                path='/signup'
+                element={<Signup />}
+              />
+              <Route
+                path='/login'
+                element={<Login />}
+              />
+              <Route 
+              path='/success'
+              element={<Success setCart={setCart}/>}
+              />
+            </Routes>
+            {/* <Footer /> */}
+          </Box>
+        </Router>
+      </ShoppingCartContext.Provider>
     </ApolloProvider>
   );
 }
