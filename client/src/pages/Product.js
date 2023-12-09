@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { useMutation, useQuery } from "@apollo/client"
+import {  useQuery } from "@apollo/client"
 import { Box, Button, Image, Text, useToast } from "@chakra-ui/react"
 import { QUERY_SINGLE_PRODUCT } from "../utils/queries"
-import { ADD_TO_CART } from "../utils/mutations"
 
-import Auth from '../utils/auth'
-
-const Product = () => {
+const Product = ({cart, setCart}) => {
     const { productId } = useParams()
     const { loading, error, data } = useQuery(QUERY_SINGLE_PRODUCT, {
         variables: { productId: productId }
@@ -36,26 +33,26 @@ const Product = () => {
     }
 
     const variantSwap = (event) => {
-        console.log(event.target.value)
         setActiveVariant(product.variants[event.target.value])
     }
-
-    const [addToCart] = useMutation(ADD_TO_CART)
     const toast = useToast()
+
+    class cartItem {
+        constructor(name, image, stripeProductId, price) {
+          this.name = name;
+          this.image = image;
+          this.stripeProductId = stripeProductId;
+          this.price = price;
+        }
+      }
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
-            await addToCart({
-                variables: {
-                    userId: Auth.getProfile().data._id,
-                    image: product.thumbnail,
-                    name: `${product.name} - ${activeVariant.name}`,
-                    stripeProductId: activeVariant.stripeProductId,
-                    price: product.price
-                }
-            })
-            window.location.reload(false)
+            const addedItem = new cartItem(`${product.name} - ${activeVariant.name}`, product.thumbnail, activeVariant.stripeProductId, product.price)
+
+            let items = (cart.items)
+            setCart({items: [...items, {...addedItem}], total: cart.total + addedItem.price})
         }
         catch (e) {
             toast({

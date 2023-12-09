@@ -101,7 +101,7 @@ return (
                 alignItems={'center'}
                 margin={{ 'base': '10px' }}
             >
-                <Link as={ReactLink} to='/store'><Image width={'360px'} src='images/Accessories.jpg'/></Link>
+                <Link as={ReactLink} to='/store/assorted'><Image width={'360px'} src='images/Accessories.jpg'/></Link>
                 <Text width={{ "base": '80%', "md": '200px' }} textAlign={'center'}>Shop our currently available keychains, trays, notebooks, and more.</Text>
             </Box>
         </Box>

@@ -13,6 +13,7 @@ const typeDefs = gql`
         email: String
         password: String
         isAdmin: Boolean
+        orders: ID
     }
 
     type Variant {
@@ -28,7 +29,7 @@ const typeDefs = gql`
         _id: ID
         name: String
         price: Int
-        subcategory: String
+        subcategory: [String]
         releaseDate: String
         variants: [Variant]
         thumbnail: String
@@ -52,9 +53,7 @@ const typeDefs = gql`
     type Order {
         _id: ID
         userId: ID
-        shippingAddress: String
-        items: [Item]
-        total: Int
+        items: [String]
         date_added: String
     }
 
@@ -70,17 +69,18 @@ const typeDefs = gql`
         product(productId: ID!): Product
         orders(userId: ID): Order
         cart(userId: ID!): Cart
-        checkout(cartId: ID!): Checkout
+        checkout(items: [String!]!): Checkout
     }
     
     type Mutation {
-        createProduct(name: String! price: Int!, description: String!, image: String!, subcategory: String!, availableCount: Int!, releaseDate: String!): Product
+        createProduct(name: String! price: Int!, description: String!, image: String!, subcategory: [String!]!, availableCount: Int!, releaseDate: String!): Product
         removeProduct(productId: ID!): Product
         createUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
         addToCart(userId: ID!, name: String!, stripeProductId: String!, price: Int!, image: String!): Cart
         removeFromCart(userId: ID!, itemId: ID!): Cart
         clearCart(userId: ID!): Cart
+        addOrder(userId: ID!, stripeProductIds: [String!]!): User
     }
 `
 

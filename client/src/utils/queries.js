@@ -81,8 +81,8 @@ export const QUERY_CART = gql`
 `
 
 export const CHECKOUT = gql`
-  query checkout($cartId: ID!) {
-    checkout(cartId: $cartId) {
+  query checkout($items: [String!]!) {
+    checkout(items: $items) {
       session
     }
   }

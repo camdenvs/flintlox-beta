@@ -36,9 +36,9 @@ const productSchema = new Schema(
             required: true
         },
         subcategory: {
-            type: String,
+            type: [String],
             required: true,
-            default: 'other'
+            default: ['other']
         },
         releaseDate: {
             type: String,

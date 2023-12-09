@@ -110,3 +110,12 @@ export const CLEAR_CART = gql`
     }
   }
 `
+
+export const ADD_ORDER = gql`
+  mutation addOrder($userId: ID!, $stripeProductIds: [String!]!) {
+    addOrder(userId: $userId, stripeProductIds: $stripeProductId) {
+      _id
+      orders
+    }
+  }
+`
