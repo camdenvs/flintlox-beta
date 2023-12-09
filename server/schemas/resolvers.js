@@ -36,6 +36,7 @@ const resolvers = {
             return await Cart.findOne({ userId: userId })
         },
         checkout: async (parent, { items }, context) => {
+            const url = new URL(context.headers.referer).origin
             const line_items = []
 
             for (let item of items) {
