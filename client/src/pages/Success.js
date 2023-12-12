@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import { Box, Center, Container, Text } from '@chakra-ui/react'
-import { ADD_ORDER } from '../utils/mutations'
+import { ADD_ORDER, LOWER_AVAILABILITY } from '../utils/mutations'
 import { useMutation } from '@apollo/client'
 import Auth from '../utils/auth'
 
 
 const Success = ({ setCart }) => {
     const addOrder = useMutation(ADD_ORDER)
+    const lowerAvailability = useMutation(LOWER_AVAILABILITY)
     const items = JSON.parse(window.localStorage.getItem('cart')).items
 
     const invoice = JSON.parse(window.localStorage.getItem('invoiceId'))
@@ -22,6 +23,11 @@ const Success = ({ setCart }) => {
                     userId: Auth.getProfile().data._id,
                     stripeProductIds: stripeProductIds,
                     invoice: invoice
+                }
+            })
+            lowerAvailability({
+                variables: {
+                    stripeProductIds: stripeProductIds
                 }
             })
         } catch (err) {

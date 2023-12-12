@@ -119,3 +119,14 @@ export const ADD_ORDER = gql`
     }
   }
 `
+
+export const LOWER_AVAILABILITY = gql`
+  mutation lowerAvailability($stripeProductIds: [String!]!) {
+    lowerAvailability(stripeProductIds: $stripeProductIds) {
+      _id
+      variants {
+        availableCount
+      }
+    }
+  }
+`

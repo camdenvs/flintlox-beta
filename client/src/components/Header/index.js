@@ -43,8 +43,8 @@ const Header = (props) => {
                     flexDirection={'column'}
                     alignItems={'center'}
                 >
-                    <Heading fontSize={{ 'base': '24px', 'md': '32px' }}>Flintlox</Heading>
-                    <Text display={{ 'base': 'none', 'md': 'flex' }} fontSize={'18px'} fontWeight={'400'}>Leather Goods and Apparel</Text>
+                    <Heading fontSize={{ 'base': '24px', 'md': '32px' }} id='flintlox-header'>Flintlox</Heading>
+                    <Text display={{ 'base': 'none', 'md': 'flex' }} fontSize={'18px'} fontWeight={'400'} id='flintlox-header2'>Leather Goods and Apparel</Text>
                     <Text display={{ 'base': 'none', 'md': 'flex' }} fontSize={'14px'} fontWeight={'400'}>Handcrafted in the United States of America</Text>
                 </Box>
 

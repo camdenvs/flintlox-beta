@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#flintlox-header {
+  font-family: 'Cinzel', serif;
+}
+
+#flintlox-header2 {
+  font-family: 'Readex Pro', sans-serif;
+}
