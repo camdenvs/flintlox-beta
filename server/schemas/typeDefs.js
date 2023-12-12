@@ -81,6 +81,7 @@ const typeDefs = gql`
         removeFromCart(userId: ID!, itemId: ID!): Cart
         clearCart(userId: ID!): Cart
         addOrder(userId: ID!, stripeProductIds: [String!]!): User
+        lowerAvailability(stripeProductIds: [String!]!): [Product]
     }
 `
 
