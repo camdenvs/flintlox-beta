@@ -101,10 +101,16 @@ const Product = ({cart, setCart}) => {
                             {activeVariant.description}
                         </Text>
                         <Text paddingTop={'35px'} fontWeight={'600'} fontSize={'24px'}>${product.price}.00</Text>
-                        <Box paddingBottom={'35px'}>
-                            <Button width={'120px'} onClick={handleFormSubmit}>Add to Cart</Button>
-                            <Text paddingLeft={'10px'}>{activeVariant.availableCount} available</Text>
-                        </Box>
+                        {activeVariant.availableCount > 0 ? 
+                            <Box paddingBottom={'35px'}>
+                                <Button width={'120px'} onClick={handleFormSubmit}>Add to Cart</Button>
+                                <Text paddingLeft={'10px'}>{activeVariant.availableCount} available</Text>
+                            </Box>
+                            :
+                            <Box paddingBottom={'35px'}>
+                                <Text paddingLeft={'10px'}>Out of Stock</Text>
+                            </Box>
+                        }
                         <Box>
                             {product.variants.map((variant, index) => (
                                 <Button border={'2px'} display={'inline'} margin={'5px'} onClick={variantSwap} fontWeight={'700'} key={variant.name} value={index} _hover={{'cursor': 'pointer'}}>{variant.name}</Button>
