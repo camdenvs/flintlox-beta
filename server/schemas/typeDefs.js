@@ -20,7 +20,6 @@ const typeDefs = gql`
         _id: ID
         name: String
         images: [String]
-        description: String
         stripeProductId: String
         availableCount: Int
     }
@@ -33,6 +32,7 @@ const typeDefs = gql`
         releaseDate: String
         variants: [Variant]
         thumbnail: String
+        description: String
     }
 
     type Item {

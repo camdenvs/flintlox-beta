@@ -18,11 +18,7 @@ const variantSchema = new Schema({
     availableCount: {
         type: Number,
         required: true
-    },
-    description: {
-        type: String,
-        required: true
-    },
+    }
 })
 
 const productSchema = new Schema(
@@ -48,6 +44,10 @@ const productSchema = new Schema(
         thumbnail: {
             type: String,
             required: true,
+        },
+        description: {
+            type: String,
+            required: true
         }
     }
 )
