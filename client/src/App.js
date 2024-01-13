@@ -15,13 +15,11 @@ import Store from './pages/Store';
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import Header from './components/Header'
-// import Footer from './components/Footer'
-// import Success from './pages/Success';
 import { Box } from '@chakra-ui/react';
 import About from './pages/About';
 import { ShoppingCartContext } from './context/ShoppingCartContext';
 import Success from './pages/Success';
-// import Footer from './components/Footer';
+import Footer from './components/Footer';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -106,7 +104,7 @@ function App() {
               element={<Success setCart={setCart}/>}
               />
             </Routes>
-            {/* <Footer /> */}
+            <Footer />
           </Box>
         </Router>
       </ShoppingCartContext.Provider>

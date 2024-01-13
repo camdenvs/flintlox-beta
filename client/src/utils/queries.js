@@ -23,13 +23,13 @@ export const QUERY_SINGLE_PRODUCT = gql`
         _id
         name
         stripeProductId
-        description
         images
         availableCount
       }
       subcategory
       releaseDate
       thumbnail
+      description
     }
   }
 `;
