@@ -32,7 +32,7 @@ const typeDefs = gql`
         releaseDate: String
         variants: [Variant]
         thumbnail: String
-        description: String
+        description: [String]
     }
 
     type Item {
