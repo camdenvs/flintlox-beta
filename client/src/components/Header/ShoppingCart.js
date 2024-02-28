@@ -36,7 +36,8 @@ const ShoppingCart = ({ cart, setCart }) => {
 
     useEffect(() => {
         if (data) {
-            localStorage.setItem('invoiceId', data.checkout.session.invoice)
+            console.log(data)
+            localStorage.setItem('sessionId', data.checkout.session)
             stripePromise.then((res) => {
                 res.redirectToCheckout({ sessionId: data.checkout.session });
             });

@@ -72,7 +72,7 @@ const Header = (props) => {
                 <Link as={ReactLink} margin={'0px 15px'} to='/'>Home</Link>
                 <Link as={ReactLink} margin={'0px 15px'} to='/store'>Latest Releases</Link>
                 <Link as={ReactLink} margin={'0px 15px'} to='/category/leather'>Leather</Link>
-                <Link as={ReactLink} margin={'0px 15px'} to='/category/apparel'>Apparel</Link>
+                {/* <Link as={ReactLink} margin={'0px 15px'} to='/category/apparel'>Apparel</Link> */}
                 <Link as={ReactLink} margin={'0px 15px'} to='/store/imperfect'>Imperfect Items</Link>
                 <Link as={ReactLink} margin={'0px 15px'} to='/about'>About Us</Link>
                 {/* <Link as={ReactLink} margin={'0px 15px'} to='/contact'>Contact</Link> */}
