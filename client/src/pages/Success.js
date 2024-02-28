@@ -10,7 +10,7 @@ const Success = ({ setCart }) => {
     const lowerAvailability = useMutation(LOWER_AVAILABILITY)
     const items = JSON.parse(window.localStorage.getItem('cart')).items
 
-    const invoice = JSON.parse(window.localStorage.getItem('invoiceId'))
+    const invoice = JSON.parse(window.localStorage.getItem('sessionId'))
     let stripeProductIds = []
 
     for (let i = 0; i < items.length; i++) {
