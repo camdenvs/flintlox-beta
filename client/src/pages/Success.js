@@ -6,8 +6,8 @@ import Auth from '../utils/auth'
 
 
 const Success = ({ setCart }) => {
-    const addOrder = useMutation(ADD_ORDER)
-    const lowerAvailability = useMutation(LOWER_AVAILABILITY)
+    const [addOrder] = useMutation(ADD_ORDER)
+    const [lowerAvailability] = useMutation(LOWER_AVAILABILITY)
     const items = JSON.parse(window.localStorage.getItem('cart')).items
 
     const invoice = window.localStorage.getItem('sessionId')
@@ -16,6 +16,14 @@ const Success = ({ setCart }) => {
     for (let i = 0; i < items.length; i++) {
         stripeProductIds.push(items[i].stripeProductId)
     }
+    try {
+        lowerAvailability({
+        variables: {
+            stripeProductIds: stripeProductIds
+        } 
+    })} catch (err) {
+        console.error(err)
+    }
     if (Auth.loggedIn()) {
         try {
             addOrder({
@@ -23,11 +31,6 @@ const Success = ({ setCart }) => {
                     userId: Auth.getProfile().data._id,
                     stripeProductIds: stripeProductIds,
                     invoice: invoice
-                }
-            })
-            lowerAvailability({
-                variables: {
-                    stripeProductIds: stripeProductIds
                 }
             })
         } catch (err) {
