@@ -1,4 +1,4 @@
-import React, { useEffect, componentDidMount } from 'react'
+import React, { useEffect } from 'react'
 import { Box, Center, Container, Text } from '@chakra-ui/react'
 import { ADD_ORDER, LOWER_AVAILABILITY } from '../utils/mutations'
 import { useMutation } from '@apollo/client'
