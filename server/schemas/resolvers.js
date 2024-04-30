@@ -172,10 +172,9 @@ const resolvers = {
         lowerAvailability: async (parent, { stripeProductIds }) => {
             const products = []
             for (var i = 0; i < stripeProductIds.length; i++) {
-                const count = await Product.findOne({ "variants.productId": stripeProductIds[i] }).availableCount
-                products.push(await Product.findOneAndUpdate(
-                    { "variants.productId": stripeProductIds[i] },
-                    { $set: { "variants.$[].availableCount": count - 1}}
+                products.push(await Product.updateOne(
+                    { $inc: { "variants.$[stripeProductId].availableCount": -1 } },
+                    { arrayFilters: [ { "stripeProductId": stripeProductIds[i] } ] }
                 ))
             }
             return products
