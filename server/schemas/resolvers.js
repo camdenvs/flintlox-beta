@@ -173,8 +173,8 @@ const resolvers = {
             const products = []
             for (var i = 0; i < stripeProductIds.length; i++) {
                 products.push(await Product.updateOne(
-                    { $inc: { "variants.$[variant].availableCount": -1 } },
-                    { arrayFilters: [ { "variant.stripeProductId": stripeProductIds[i] } ] }
+                    { "variants.stripeProductId": stripeProductIds[i] },
+                    { $inc: { "variants.$.availableCount": -1 } }
                 ))
             }
             return products
