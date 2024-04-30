@@ -41,12 +41,12 @@ const Success = ({ setCart }) => {
         }
     }, [addOrder, lowerAvailability])
 
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         window.location.assign('/');
-    //     }, 3000);
-    //     setCart(window.localStorage.setItem('cart', JSON.stringify({ items: [], total: 0 })))
-    // }, [setCart]);
+    useEffect(() => {
+        setTimeout(() => {
+            window.location.assign('/');
+        }, 3000);
+        setCart(window.localStorage.setItem('cart', JSON.stringify({ items: [], total: 0 })))
+    }, [setCart]);
 
     return (
         <Box
