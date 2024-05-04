@@ -13,7 +13,7 @@ const resolvers = {
             return await User.findOne({ username })
         },
         products: async (parent, { subcategory }) => {
-            const params = subcategory ? { subcategory } : {}
+            const params = subcategory ? { subcategory } : {$ne: { subcategory: 'imperfect' }}
             return await Product.find(params)
         },
         product: async (parent, { productId }) => {

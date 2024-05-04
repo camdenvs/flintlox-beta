@@ -23,10 +23,10 @@ const Store = () => {
                         (products.map((product) => (
                             <Card border={'1px'} borderColor={'blackAlpha.300'} w={{ "sm": "100%", "md": "360px" }} mb='5' _hover={{'base': {}, 'md': { boxShadow: '2xl', width: '385px' }}} transition={'0.3s'} key={product._id}>
                                 <Link href={`/products/${product._id}`} _hover={'none'}>
-                                    <Center><CardHeader fontSize={'32px'} pb='0'>{product.name}</CardHeader></Center>
+                                <Image src={product.thumbnail ? `/images/product/${product.thumbnail}` : ''} w='300px' h='300px' mx='auto' marginTop={'25px'}></Image>
+                                    <Center><CardHeader fontSize={'20px'} pb='0'>{product.name}</CardHeader></Center>
                                     <CardBody>
-                                        <Image src={product.thumbnail ? `/images/product/${product.thumbnail}` : ''} w='300px' h='300px' mx='auto'></Image>
-                                        <Center><Text fontSize={'18px'} mt='3'>${product.price}</Text></Center>
+                                        <Center><Text fontSize={'18px'} mt='3' mb={'auto'}>${product.price}</Text></Center>
                                     </CardBody>
                                 </Link>
                             </Card>
