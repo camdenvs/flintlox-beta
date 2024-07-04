@@ -29,7 +29,7 @@ const resolvers = {
             if (args.userId) {
                 return await Order.find({ userId: args.userId })
             } else {
-                return await Order.find().sort({ dateAdded: 1 })
+                return await Order.find().sort({ date_added: 1 })
             }
         },
         cart: async (parent, { userId }) => {
@@ -153,9 +153,22 @@ const resolvers = {
                 { userId: userId }
             )
         },
-        addOrder: async (parent, { userId, stripeProductIds }) => {
+        addOrder: async (parent, { userId, stripeProductIds, invoice, names, images }) => {
             const user = await User.findOne({ userId: userId })
-            const order = await Order.create({ userId: userId, items: stripeProductIds })
+            const order = await Order.create({ userId: userId, items: [], invoice: invoice })
+            for (var i = 0; i < stripeProductIds.length; i++) {
+                order.update(
+                    {
+                        $push: {
+                            items: {
+                                name: names[i],
+                                image: images[i],
+                                stripeProductId: stripeProductIds[i]
+                            }
+                        }
+                    }
+                )
+            }
 
             return await user.updateOne(
                 {

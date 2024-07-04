@@ -41,6 +41,7 @@ export const QUERY_ME = gql`
       username
       email
       isAdmin
+      orders
     }
   }
 `;
@@ -52,13 +53,12 @@ export const QUERY_ORDERS = gql`
       _id
       userId
       items {
-        _id
         name
+        image
         stripeProductId
-        price
       }
-      total
       date_added
+      shipping_status
     }
   }
 `

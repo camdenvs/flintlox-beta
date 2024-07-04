@@ -112,8 +112,8 @@ export const CLEAR_CART = gql`
 `
 
 export const ADD_ORDER = gql`
-  mutation addOrder($userId: ID!, $stripeProductIds: [String!]!) {
-    addOrder(userId: $userId, stripeProductIds: $stripeProductIds) {
+  mutation addOrder($userId: ID!, $stripeProductIds: [String!]!, $invoice: String!, $names: [String!]!, $images: [String!]!) {
+    addOrder(userId: $userId, stripeProductIds: $stripeProductIds, invoice: $invoice, names: $names, images: $images) {
       _id
       orders
     }

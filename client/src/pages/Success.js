@@ -13,9 +13,13 @@ const Success = ({ setCart }) => {
         const items = JSON.parse(window.localStorage.getItem('cart')).items
         const invoice = window.localStorage.getItem('sessionId')
         let stripeProductIds = []
+        let images = []
+        let names = []
 
         for (let i = 0; i < items.length; i++) {
             stripeProductIds.push(items[i].stripeProductId)
+            images.push(items[i].image)
+            names.push(items[i].name)
         }
         try {
             lowerAvailability({
@@ -32,7 +36,9 @@ const Success = ({ setCart }) => {
                     variables: {
                         userId: Auth.getProfile().data._id,
                         stripeProductIds: stripeProductIds,
-                        invoice: invoice
+                        invoice: invoice,
+                        images: images,
+                        names: names
                     }
                 })
             } catch (err) {
