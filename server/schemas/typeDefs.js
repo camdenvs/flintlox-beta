@@ -50,11 +50,18 @@ const typeDefs = gql`
         total: Int
     }
 
+    type OrderItem {
+        name: String
+        image: String
+        stripeProductId: ID
+    }
+
     type Order {
         _id: ID
         userId: ID
-        items: [String]
+        items: [OrderItem]
         date_added: String
+        shipping_status: String
     }
 
     type Checkout {
@@ -80,7 +87,7 @@ const typeDefs = gql`
         addToCart(userId: ID!, name: String!, stripeProductId: String!, price: Int!, image: String!): Cart
         removeFromCart(userId: ID!, itemId: ID!): Cart
         clearCart(userId: ID!): Cart
-        addOrder(userId: ID!, stripeProductIds: [String!]!): User
+        addOrder(userId: ID!, stripeProductIds: [String!]!, invoice: String!, names: [String!]!, images: [String!]!): User
         lowerAvailability(stripeProductIds: [String!]!): [Product]
     }
 `

@@ -11,7 +11,7 @@ const Header = (props) => {
 
     useEffect(() => {
         setNavbarOpen(false); // Close the navigation panel
-      }, [ pathname ])
+    }, [pathname])
 
     const logout = (event) => {
         event.preventDefault()
@@ -51,13 +51,16 @@ const Header = (props) => {
                 <Box width={{ 'base': '64px', 'md': '75px' }} textAlign={'center'}>
 
                     {Auth.loggedIn() ? (
-                        <Link onClick={logout} textDecoration={'none'} display={{'base': 'none', 'md': 'inline'}}>Logout</Link>
+                        <>
+                            <Link onClick={logout} textDecoration={'none'} display={{ 'base': 'none', 'md': 'inline' }}>Logout</Link>
+                            <Link as={ReactLink} to='/account' textDecoration={'none'} display={{ 'base': 'none', 'md': 'inline' }}>Account</Link>
+                        </>
                     ) : (
-                        <Link as={ReactLink} to='/login' display={{'base': 'none', 'md': 'inline'}}>Login</Link>
+                        <Link as={ReactLink} to='/login' display={{ 'base': 'none', 'md': 'inline' }}>Login</Link>
                     )}
-                    
+
                     <ShoppingCart cart={props.cart} setCart={props.setCart} />
-                    
+
                 </Box>
             </Box>
             <Box
@@ -112,10 +115,10 @@ const Header = (props) => {
                 <Link as={ReactLink} margin={'0px 15px'} to='/about'>About Us</Link>
                 <Link as={ReactLink} margin={'0px 15px'} to='/contact'>Contact</Link>
                 {Auth.loggedIn() ? (
-                        <Link onClick={logout} textDecoration={'none'} margin={'0px 15px'}>Logout</Link>
-                    ) : (
-                        <Link as={ReactLink} margin={'0px 15px'} to='/login'>Login</Link>
-                    )}
+                    <Link onClick={logout} textDecoration={'none'} margin={'0px 15px'}>Logout</Link>
+                ) : (
+                    <Link as={ReactLink} margin={'0px 15px'} to='/login'>Login</Link>
+                )}
             </Box>
         </Box>
     )
