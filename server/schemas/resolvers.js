@@ -26,7 +26,9 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         orders: async (parent, args) => {
+            console.log(args)
             if (args.userId) {
+                console.log(args)
                 return await Order.find({ userId: args.userId })
             } else {
                 return await Order.find().sort({ date_added: 1 })
@@ -56,7 +58,7 @@ const resolvers = {
                 mode: 'payment',
                 success_url: `${url}/success`,
                 cancel_url: `${url}/`,
-                
+
             })
 
             return { session: session.id }
@@ -117,15 +119,15 @@ const resolvers = {
                         $set: { total: cart.total + price }
                     },
                     {
-                      new: true,
-                      runValidators: true,
+                        new: true,
+                        runValidators: true,
                     }
                 )
             }
-            else{
+            else {
                 return await Cart.create({
                     userId: userId,
-                    items: [{ stripeProductId: stripeProductId, price: price}],
+                    items: [{ stripeProductId: stripeProductId, price: price }],
                     total: price
                 })
             }
@@ -143,8 +145,8 @@ const resolvers = {
                     }
                 },
                 {
-                  new: true,
-                  runValidators: true,
+                    new: true,
+                    runValidators: true,
                 }
             )
         },
@@ -156,20 +158,17 @@ const resolvers = {
         addOrder: async (parent, { userId, stripeProductIds, invoice, names, images }) => {
             const user = await User.findOne({ userId: userId })
             const order = await Order.create({ userId: userId, items: [], invoice: invoice })
-            for (var i = 0; i < stripeProductIds.length; i++) {
-                order.update(
-                    {
-                        $push: {
-                            items: {
-                                name: names[i],
-                                image: images[i],
-                                stripeProductId: stripeProductIds[i]
-                            }
+            order.update(
+                {
+                    $addToSet: {
+                        items: {
+                            name: names[i],
+                            image: images[i],
+                            stripeProductId: stripeProductIds[i]
                         }
                     }
-                )
-            }
-
+                }
+            )
             return await user.updateOne(
                 {
                     $push: {
@@ -177,8 +176,8 @@ const resolvers = {
                     }
                 },
                 {
-                  new: true,
-                  runValidators: true,
+                    new: true,
+                    runValidators: true,
                 }
             )
         },

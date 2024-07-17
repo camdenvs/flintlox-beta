@@ -52,8 +52,8 @@ const Header = (props) => {
 
                     {Auth.loggedIn() ? (
                         <>
-                            <Link onClick={logout} textDecoration={'none'} display={{ 'base': 'none', 'md': 'inline' }}>Logout</Link>
-                            <Link as={ReactLink} to='/account' textDecoration={'none'} display={{ 'base': 'none', 'md': 'inline' }}>Account</Link>
+                            <Link as={ReactLink} to='/account' textDecoration={'none'} display={{ 'base': 'none', 'md': 'block' }}>Account</Link>
+                            <Link onClick={logout} textDecoration={'none'} display={{ 'base': 'none', 'md': 'block' }}>Logout</Link>
                         </>
                     ) : (
                         <Link as={ReactLink} to='/login' display={{ 'base': 'none', 'md': 'inline' }}>Login</Link>
@@ -115,7 +115,10 @@ const Header = (props) => {
                 <Link as={ReactLink} margin={'0px 15px'} to='/about'>About Us</Link>
                 <Link as={ReactLink} margin={'0px 15px'} to='/contact'>Contact</Link>
                 {Auth.loggedIn() ? (
-                    <Link onClick={logout} textDecoration={'none'} margin={'0px 15px'}>Logout</Link>
+                    <>
+                        <Link onClick={logout} textDecoration={'none'} margin={'0px 15px'}>Logout</Link>
+                        <Link as={ReactLink}  to='/account' textDecoration={'none'} margin={'0px 15px'}>Account</Link>
+                    </>
                 ) : (
                     <Link as={ReactLink} margin={'0px 15px'} to='/login'>Login</Link>
                 )}
