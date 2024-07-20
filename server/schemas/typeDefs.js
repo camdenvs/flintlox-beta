@@ -62,6 +62,7 @@ const typeDefs = gql`
         items: [OrderItem]
         date_added: String
         shipping_status: String
+        invoice: String
     }
 
     type Checkout {
@@ -74,7 +75,7 @@ const typeDefs = gql`
         user(username: String!): User
         products(subcategory: String): [Product]
         product(productId: ID!): Product
-        orders(userId: ID!): Order
+        orders: Order
         cart(userId: ID!): Cart
         checkout(items: [String!]!): Checkout
     }

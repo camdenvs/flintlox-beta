@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Image, Text } from "@chakra-ui/react"
 import { QUERY_ORDERS } from "../utils/queries";
 import { useQuery } from "@chakra-ui/react";
@@ -7,15 +7,13 @@ import Auth from "../utils/auth";
 const Account = () => {
     const userData = Auth.getProfile().data
 
-    const [loading, error, data] = useQuery(QUERY_ORDERS, {
-        variables: { userId: userData._id }
-    })
-
-    console.log(Auth.getProfile().data._id)
+    const [loading, error, data] = useQuery(QUERY_ORDERS)
 
     const orders = data?.orders || []
 
-    console.log(orders)
+    useEffect(() => {
+        setTimeout(100) 
+        console.log(data, loading, error)})
 
     return (
         <>

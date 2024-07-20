@@ -48,8 +48,8 @@ export const QUERY_ME = gql`
 
 
 export const QUERY_ORDERS = gql`
-  query orders($userId: ID!) {
-    orders(userId: $userId) {
+  query orders {
+    orders {
       _id
       userId
       items {
@@ -59,6 +59,7 @@ export const QUERY_ORDERS = gql`
       }
       date_added
       shipping_status
+      invoice
     }
   }
 `
