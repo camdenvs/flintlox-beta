@@ -1,24 +1,26 @@
 const { Schema, model } = require('mongoose');
 
+const orderItem = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    image: {
+        type: String,
+        required: true
+    },
+    stripeProductId: {
+        type: String,
+        required: true
+    }
+})
+
 const orderSchema = new Schema({
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'user'
     },
-    items: [{
-        name: {
-            type: String,
-            required: true
-        },
-        image: {
-            type: String,
-            required: true
-        },
-        stripeProductId: {
-            type: String,
-            required: true
-        }
-    }],
+    items: [orderItem],
     date_added: {
         type: String,
         default: Date.now
