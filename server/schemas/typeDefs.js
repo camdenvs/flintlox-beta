@@ -51,9 +51,10 @@ const typeDefs = gql`
     }
 
     type OrderItem {
+        _id: ID
         name: String
         image: String
-        stripeProductId: ID
+        stripeProductId: String
     }
 
     type Order {

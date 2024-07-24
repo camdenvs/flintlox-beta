@@ -53,8 +53,9 @@ export const QUERY_ORDERS = gql`
       _id
       userId
       items {
-        name
+        _id
         image
+        name
         stripeProductId
       }
       date_added
