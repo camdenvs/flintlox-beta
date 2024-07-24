@@ -13,7 +13,7 @@ const typeDefs = gql`
         email: String
         password: String
         isAdmin: Boolean
-        orders: ID
+        orders: [ID]
     }
 
     type Variant {

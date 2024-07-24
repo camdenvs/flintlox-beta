@@ -26,7 +26,10 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         orders: async (parent, { userId }) => {
-            return await Order.find({ userId: userId })
+            console.log(userId)
+            const orders = await Order.find({ userId: userId })
+            console.log(orders)
+            return orders
         },
         cart: async (parent, { userId }) => {
             return await Cart.findOne({ userId: userId })
