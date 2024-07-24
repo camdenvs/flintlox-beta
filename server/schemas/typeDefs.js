@@ -76,7 +76,7 @@ const typeDefs = gql`
         user(username: String!): User
         products(subcategory: String): [Product]
         product(productId: ID!): Product
-        orders(userId: ID!): Order
+        orders(userId: ID!): [Order]
         cart(userId: ID!): Cart
         checkout(items: [String!]!): Checkout
     }
