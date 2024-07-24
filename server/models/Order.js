@@ -20,7 +20,7 @@ const orderSchema = new Schema({
         }
     }],
     date_added: {
-        type: Date,
+        type: String,
         default: Date.now
     },
     shipping_status: {
