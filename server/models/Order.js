@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const dateFormat = require('../utils/dateFormat')
 
 const orderItem = new Schema({
     name: {
@@ -23,7 +24,7 @@ const orderSchema = new Schema({
     items: [orderItem],
     date_added: {
         type: String,
-        default: Date.now
+        default: dateFormat(Date.now, { monthLength: 'short'})
     },
     shipping_status: {
         type: String,

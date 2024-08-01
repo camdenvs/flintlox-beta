@@ -12,7 +12,14 @@ const resolvers = {
         user: async (parent, { username }) => {
             return await User.findOne({ username })
         },
-        products: async (parent, { subcategory }) => {
+        products: async (parent, { subcategory, ids }) => {
+            if (ids) {
+                return await Product.find({
+                    _id: {
+                        $in: [ids]
+                    }
+                })
+            }
             const params = subcategory ? { subcategory } : { subcategory: { $ne: 'imperfect' } }
             return await Product.find(params)
         },
