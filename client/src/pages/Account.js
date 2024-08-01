@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Image, Text } from "@chakra-ui/react"
-import { QUERY_ORDERS } from "../utils/queries";
+import { Box, Image, Text, Link } from "@chakra-ui/react"
+import { QUERY_ORDERS, QUERY_PRODUCTS } from "../utils/queries";
 import { useQuery } from "@apollo/client";
 import Auth from "../utils/auth";
 
@@ -11,7 +11,16 @@ const Account = () => {
         variables: { userId: userData._id }
     })
 
+    
+    
     const orders = data?.orders || []
+
+    const history = JSON.parse(window.localStorage.getItem('history'))
+    const productHistory = useQuery(QUERY_PRODUCTS, {
+        variables: { ids: history } 
+    })
+
+    const products = productHistory.data?.products || []
 
     return (
         <>
@@ -43,6 +52,24 @@ const Account = () => {
                 </Box>
                 <Box>
                     <Text>Browsing History</Text>
+                    {productHistory.loading || productHistory.error ? 
+                        <Text>Loading...</Text> : (
+                            <>
+                                {products &&
+                                    products.length > 0 ?
+                                    (products.map((product) => (
+                                        <>
+                                            <Link href={`/products/${product._id}`} _hover={'none'} key={product._id}>
+                                                <Image src={product.image} />
+                                            </Link>
+                                        </>
+                                    ))) : (
+                                        <Text>Nothing Here Yet...</Text>
+                                    )
+                                }
+                            </>
+                        )
+                    }
                 </Box>
             </Box>
         </>)

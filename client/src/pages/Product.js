@@ -11,6 +11,21 @@ const Product = ({ cart, setCart }) => {
     })
     const product = data?.product || {}
 
+    const history = JSON.parse(window.localStorage.getItem('history'))
+
+    useEffect(() => {
+        const matchChecker = new Set(history)
+
+        if (!matchChecker.has(productId)) {
+            if (history.length === 5) {
+                history.shift()
+            }
+            history.push(productId)
+        }
+
+        window.localStorage.setItem('history', JSON.stringify(history))
+    }, [history, productId])
+
     const [activeVariant, setActiveVariant] = useState('')
 
     const [activeImage, setActiveImage] = useState('')

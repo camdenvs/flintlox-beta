@@ -48,7 +48,11 @@ const client = new ApolloClient({
 
 function App() {
   if (window.localStorage.getItem('cart') === null) {
-    window.localStorage.setItem('cart', JSON.stringify({ items: [], total: 0}))
+    window.localStorage.setItem('cart', JSON.stringify({ items: [], total: 0 }))
+  }
+
+  if (window.localStorage.getItem('history') === null) {
+    window.localStorage.setItem('history', JSON.stringify([]))
   }
 
   const [cart, setCart] = useState(JSON.parse(window.localStorage.getItem('cart')))
