@@ -60,7 +60,7 @@ const Account = () => {
                                     (products.map((product) => (
                                         <>
                                             <Link href={`/products/${product._id}`} _hover={'none'} key={product._id}>
-                                                <Image src={product.image} />
+                                                <Image src={`/images/product/${product.thumbnail}`} />
                                             </Link>
                                         </>
                                     ))) : (
