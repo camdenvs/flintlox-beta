@@ -16,7 +16,7 @@ const resolvers = {
             if (ids) {
                 return await Product.find({
                     _id: {
-                        $in: ids.map((id) => ObjectID(id))
+                        $in: ids
                     }
                 })
             }
