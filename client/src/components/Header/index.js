@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Link, Image, Box, Heading, Text, Button } from '@chakra-ui/react'
 import { Link as ReactLink, useLocation } from 'react-router-dom'
 import { FaChevronDown } from 'react-icons/fa'
-import Auth from '../../utils/auth'
-import ShoppingCart from './ShoppingCart'
+// import Auth from '../../utils/auth'
+// import ShoppingCart from './ShoppingCart'
 
 const Header = (props) => {
     const [navbarOpen, setNavbarOpen] = useState(false)
@@ -13,10 +13,10 @@ const Header = (props) => {
         setNavbarOpen(false); // Close the navigation panel
     }, [pathname])
 
-    const logout = (event) => {
-        event.preventDefault()
-        Auth.logout()
-    }
+    // const logout = (event) => {
+    //     event.preventDefault()
+    //     Auth.logout()
+    // }
 
     const toggleNav = (event) => {
         event.preventDefault()
@@ -48,7 +48,7 @@ const Header = (props) => {
                     <Text display={{ 'base': 'none', 'md': 'flex' }} fontSize={'14px'} fontWeight={'400'}>Handcrafted in the United States of America</Text>
                 </Box>
 
-                <Box width={{ 'base': '64px', 'md': '75px' }} textAlign={'center'}>
+                {/* <Box width={{ 'base': '64px', 'md': '75px' }} textAlign={'center'}>
 
                     {Auth.loggedIn() ? (
                         <>
@@ -61,7 +61,7 @@ const Header = (props) => {
 
                     <ShoppingCart cart={props.cart} setCart={props.setCart} />
 
-                </Box>
+                </Box> */}
             </Box>
             <Box
                 display={{ 'base': 'none', 'md': 'flex' }}
@@ -73,10 +73,11 @@ const Header = (props) => {
                 margin={'0px 2.5%'}
             >
                 <Link as={ReactLink} margin={'0px 15px'} to='/'>Home</Link>
-                <Link as={ReactLink} margin={'0px 15px'} to='/store'>Latest Releases</Link>
-                <Link as={ReactLink} margin={'0px 15px'} to='/category/leather'>Leather</Link>
+                {/* <Link as={ReactLink} margin={'0px 15px'} to='/store'>Latest Releases</Link> */}
+                {/* <Link as={ReactLink} margin={'0px 15px'} to='/category/leather'>Leather</Link> */}
                 {/* <Link as={ReactLink} margin={'0px 15px'} to='/category/apparel'>Apparel</Link> */}
-                <Link as={ReactLink} margin={'0px 15px'} to='/store/imperfect'>Imperfect Items</Link>
+                {/* <Link as={ReactLink} margin={'0px 15px'} to='/store/imperfect'>Imperfect Items</Link> */}
+                <Link as={ReactLink} margin={'0px 15px'} to='/gallery'>Product Gallery</Link>
                 <Link as={ReactLink} margin={'0px 15px'} to='/about'>About Us</Link>
                 {/* <Link as={ReactLink} margin={'0px 15px'} to='/contact'>Contact</Link> */}
             </Box>
@@ -108,20 +109,21 @@ const Header = (props) => {
                 margin={'0px 2.5%'}
             >
                 <Link as={ReactLink} margin={'0px 15px'} to='/'>Home</Link>
-                <Link as={ReactLink} margin={'0px 15px'} to='/store'>Latest Releases</Link>
+                {/* <Link as={ReactLink} margin={'0px 15px'} to='/store'>Latest Releases</Link>
                 <Link as={ReactLink} margin={'0px 15px'} to='/category/leather'>Leather</Link>
                 <Link as={ReactLink} margin={'0px 15px'} to='/category/apparel'>Apparel</Link>
-                <Link as={ReactLink} margin={'0px 15px'} to='/imperfect'>Imperfect Items</Link>
+                <Link as={ReactLink} margin={'0px 15px'} to='/imperfect'>Imperfect Items</Link> */}
+                <Link as={ReactLink} margin={'0px 15px'} to='/gallery'>Product Gallery</Link>
                 <Link as={ReactLink} margin={'0px 15px'} to='/about'>About Us</Link>
-                <Link as={ReactLink} margin={'0px 15px'} to='/contact'>Contact</Link>
-                {Auth.loggedIn() ? (
+                {/* <Link as={ReactLink} margin={'0px 15px'} to='/contact'>Contact</Link> */}
+                {/* {Auth.loggedIn() ? (
                     <>
                         <Link onClick={logout} textDecoration={'none'} margin={'0px 15px'}>Logout</Link>
                         <Link as={ReactLink}  to='/account' textDecoration={'none'} margin={'0px 15px'}>Account</Link>
                     </>
                 ) : (
                     <Link as={ReactLink} margin={'0px 15px'} to='/login'>Login</Link>
-                )}
+                )} */}
             </Box>
         </Box>
     )

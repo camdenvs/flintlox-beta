@@ -2,55 +2,20 @@ const { Schema, model } = require('mongoose')
 // const { Model, DataTypes } = require('sequelize');
 // const sequelize = require('../config/connection');
 
-const variantSchema = new Schema({
+const productSchema = new Schema({
     name: {
+        type: String,
+        required: true
+    },
+    productType: {
         type: String,
         required: true,
     },
-    stripeProductId: {
+    listingURL: {
         type: String,
-        required: true
-    },
-    images: {
-        type: [String],
-        required: true
-    },
-    availableCount: {
-        type: Number,
         required: true
     }
 })
-
-const productSchema = new Schema(
-    {
-        name: {
-            type: String,
-            required: true
-        },
-        price: {
-            type: Number,
-            required: true
-        },
-        subcategory: {
-            type: [String],
-            required: true,
-            default: ['other']
-        },
-        releaseDate: {
-            type: String,
-            required: true
-        },
-        variants: [variantSchema],
-        thumbnail: {
-            type: String,
-            required: true,
-        },
-        description: {
-            type: [String],
-            required: true
-        }
-    }
-)
 
 const Product = model('Product', productSchema)
 

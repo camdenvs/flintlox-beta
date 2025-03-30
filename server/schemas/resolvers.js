@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Product, Order, Cart } = require('../models');
+const { User, Product, Order, Cart, ProductType } = require('../models');
 const { signToken } = require('../utils/auth');
 require('dotenv').config()
 const stripe = require("stripe")(process.env.STRIPE_KEY)
@@ -12,7 +12,7 @@ const resolvers = {
         user: async (parent, { username }) => {
             return await User.findOne({ username })
         },
-        products: async (parent, { subcategory, ids }) => {
+        products: async (parent, { productType, ids }) => {
             if (ids) {
                 return await Product.find({
                     _id: {
@@ -20,11 +20,16 @@ const resolvers = {
                     }
                 })
             }
-            const params = subcategory ? { subcategory } : { subcategory: { $ne: 'imperfect' } }
-            return await Product.find(params)
+            if (productType) {
+                return await Product.find(productType)
+            }
+            return await Product.find()
         },
         product: async (parent, { productId }) => {
             return await Product.findOne({ _id: productId })
+        },
+        productTypes: async () => {
+            return await ProductType.find()
         },
         me: async (parent, args, context) => {
             if (context.user) {
@@ -70,16 +75,8 @@ const resolvers = {
     },
 
     Mutation: {
-        createProduct: async (parent, { name, price, description, image, category, sizes }) => {
-            const stripeProduct = await stripe.products.create({
-                name: name,
-                description: description,
-                default_price_data: {
-                    unit_amount: price * 100,
-                    currency: 'usd',
-                }
-            })
-            return await Product.create({ name, price, description, image, category, sizes, stripeProductId: stripeProduct.id })
+        createProduct: async (parent, { name, productType, listingURL }) => {
+            return await Product.create({ name, productType, listingURL })
         },
         removeProduct: async (parent, { productId }) => {
             return await Product.findOneAndDelete({ _id: productId })

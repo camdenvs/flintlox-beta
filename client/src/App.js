@@ -21,6 +21,8 @@ import { ShoppingCartContext } from './context/ShoppingCartContext';
 import Success from './pages/Success';
 import Footer from './components/Footer';
 import Account from './pages/Account';
+import Admin from './pages/Admin';
+import Gallery from './pages/Gallery';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -111,6 +113,14 @@ function App() {
               <Route 
               path='/account'
               element={<Account />}
+              />
+              <Route 
+              path='/admin'
+              element={<Admin />}
+              />
+              <Route 
+              path='/gallery'
+              element={<Gallery />}
               />
             </Routes>
             <Footer />

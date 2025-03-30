@@ -34,15 +34,23 @@ export const ADD_TO_NEWSLETTER = gql`
 `;
 
 export const CREATE_PRODUCT = gql`
-  mutation createProduct($name: String!, $price: Int!, $description: String!, $image: String!, $category: String!, $sizes: String) {
-    createProduct(name: $name, price: $price, description: $description, image: $image, category: $category, sizes: $sizes) {
+  mutation createProduct($name: String!, $productType: ID!, $listingURL: String!) {
+    createProduct(name: $name, productType: $productType, listingURL: $listingURL) {
       _id
       name
-      price
-      description
+      productType
+      listingURL
+    }
+  }
+`
+
+export const CREATE_PRODUCT_TYPE = gql`
+  mutation createProductType($name: String!, $image: String!, $subcategory: String!) {
+    createProductType(name: $name, image: $image, subcategory: $subcategory) {
+      _id
+      name
       image
-      category
-      sizes
+      subcategory
     }
   }
 `
@@ -52,10 +60,8 @@ export const REMOVE_PRODUCT = gql`
     removeProduct(productId: $productId) {
       _id
       name
-      price
-      description
-      image
-      category
+      productType
+      listingURL
     }
   }
 `

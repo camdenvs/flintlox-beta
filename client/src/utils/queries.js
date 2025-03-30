@@ -1,35 +1,34 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_PRODUCTS = gql`
-  query getProducts($subcategory: String, $ids: [ID]) {
-    products(subcategory: $subcategory, ids: $ids) {
+  query getProducts($ids: [ID]) {
+    products(ids: $ids) {
       _id
       name
-      price
-      subcategory
-      releaseDate
-      thumbnail
+      productType
+      listingURL
     }
   }
 `;
+
+export const QUERY_PRUDUCT_TYPES = gql`
+  query getProductTypes {
+    productTypes {
+      _id
+      name
+      image
+      subcategory
+    }
+  }
+`
 
 export const QUERY_SINGLE_PRODUCT = gql`
   query getSingleProduct($productId: ID!) {
     product(productId: $productId) {
       _id
       name
-      price
-      variants {
-        _id
-        name
-        stripeProductId
-        images
-        availableCount
-      }
-      subcategory
-      releaseDate
-      thumbnail
-      description
+      productType
+      listingURL
     }
   }
 `;
