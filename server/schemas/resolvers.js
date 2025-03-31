@@ -21,7 +21,7 @@ const resolvers = {
                 })
             }
             if (productType) {
-                return await Product.find(productType)
+                return await Product.find({ productType: productType })
             }
             return await Product.find()
         },

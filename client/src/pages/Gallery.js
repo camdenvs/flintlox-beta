@@ -1,6 +1,6 @@
 import React from "react"
 import { useQuery } from "@apollo/client"
-import { Flex, CardHeader, Center, Image, Text, Card, Link } from '@chakra-ui/react'
+import { Flex, CardHeader, Image, Text, Card, Link } from '@chakra-ui/react'
 import { QUERY_PRUDUCT_TYPES } from "../utils/queries"
 
 const Gallery = () => {
