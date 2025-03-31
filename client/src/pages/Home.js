@@ -93,7 +93,17 @@ return (
                 alignItems={'center'}
                 margin={{ 'base': '10px' }}
             >
-                <Link as={ReactLink} to='https://www.etsy.com/shop/FlintloxLeatherGoods'><Box margin={'50px'}><FaEtsy size={'150px'}/></Box></Link>
+                <Link as={ReactLink} to='https://www.etsy.com/shop/FlintloxLeatherGoods'>
+                    <Box   
+                        margin={'50px'} 
+                        alignItems={'center'} 
+                        display={'flex'}
+                        flexDirection={'column'}
+                    >
+                        <FaEtsy size={'150px'}/>
+                        <Text fontSize={'20px'}>Etsy</Text>
+                    </Box>
+                </Link>
             </Box>
         </Box>
     </Box>
