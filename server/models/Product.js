@@ -8,7 +8,7 @@ const productSchema = new Schema({
         required: true
     },
     productType: {
-        type: String,
+        type: Schema.Types.ObjectId,
         required: true,
     },
     listingURL: {
