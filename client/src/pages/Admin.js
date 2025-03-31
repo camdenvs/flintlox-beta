@@ -28,16 +28,16 @@ const Admin = () => {
         });
     };
 
-    class Variant {
-        constructor(name, image, stripeProductId, availableCount) {
-            this.name = name;
-            this.image = image;
-            this.stripeProductId = stripeProductId;
-            this.availableCount = availableCount;
-        }
-    }
+    // class Variant {
+    //     constructor(name, image, stripeProductId, availableCount) {
+    //         this.name = name;
+    //         this.image = image;
+    //         this.stripeProductId = stripeProductId;
+    //         this.availableCount = availableCount;
+    //     }
+    // }
 
-    const variants = []
+    // const variants = []
 
     return (<>
         <form>
