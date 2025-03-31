@@ -26,6 +26,7 @@ const Header = (props) => {
 
     return (
         <Box display='block' backgroundColor='#fff' color='#0F0F0F' pos='fixed' zIndex='1001' width='100%' top='0' left='0'>
+            <Image src='/Flintlox_Logo.png' width={{ 'base': '64px', 'md': '75px' }} margin={'15px'} pos={'fixed'}/>
             <Box
                 display={'flex'}
                 justifyContent={'space-between'}
@@ -37,8 +38,9 @@ const Header = (props) => {
                 padding={{ "base": "0px 15px", "sm": "0px 40px" }}
                 borderBottom={'1px solid #A6A6A6'}
             >
-                <Image src='/Flintlox_Logo.png' width={{ 'base': '64px', 'md': '75px' }} />
+                
                 <Box
+                    marginX={'auto'}
                     display={'flex'}
                     flexDirection={'column'}
                     alignItems={'center'}

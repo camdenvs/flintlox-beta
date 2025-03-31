@@ -5,6 +5,7 @@ import { Box,
     // Heading, 
     Image, Link, Text } from '@chakra-ui/react'
 import { Link as ReactLink } from 'react-router-dom'
+import { FaEbay, FaEtsy } from 'react-icons/fa'
 
 const Home = () => {
 
@@ -70,6 +71,7 @@ return (
             <Heading textTransform={'uppercase'} textAlign={'center'}>New things to come</Heading>
             <Text display={{'base': 'none', 'md': 'inline'}}>Next product drop:</Text> {countdownDate}
         </Box> */}
+        <Text fontSize={'20px'} marginTop={'20px'}>Check Out Our Online Shops!</Text>
         <Box
             flexDirection={{ 'base': 'column', 'md': 'row' }}
             width={'100%'}
@@ -83,8 +85,7 @@ return (
                 alignItems={'center'}
                 margin={{ 'base': '10px' }}
             >
-                <Link as={ReactLink} to='/store/wallets'><Image width={'360px'} src={'images/Wallets.jpg'} /></Link>
-                <Text width={{ "base": '80%', "md": '200px' }} textAlign={'center'}>Shop our currently available wallets</Text>
+                <Link as={ReactLink} to='https://www.ebay.com/usr/flintlox'><FaEbay size={'250px'}/></Link>
             </Box>
             <Box
                 display={'flex'}
@@ -92,17 +93,7 @@ return (
                 alignItems={'center'}
                 margin={{ 'base': '10px' }}
             >
-                <Link as={ReactLink} to='/store/bags'><Image width={'360px'} src='images/Bags.jpg' /></Link>
-                <Text width={{ "base": '80%', "md": '200px' }} textAlign={'center'}>Shop our currently available bags</Text>
-            </Box>
-            <Box
-                display={'flex'}
-                flexDirection={'column'}
-                alignItems={'center'}
-                margin={{ 'base': '10px' }}
-            >
-                <Link as={ReactLink} to='/store/assorted'><Image width={'360px'} src='images/Accessories.jpg'/></Link>
-                <Text width={{ "base": '80%', "md": '200px' }} textAlign={'center'}>Shop our currently available keychains, trays, notebooks, and more.</Text>
+                <Link as={ReactLink} to='https://www.etsy.com/shop/FlintloxLeatherGoods'><Box margin={'50px'}><FaEtsy size={'150px'}/></Box></Link>
             </Box>
         </Box>
     </Box>

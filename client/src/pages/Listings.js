@@ -23,7 +23,7 @@ const Listings = () => {
                         listings.length > 0 ?
                         (listings.map((listing) => (
                             <Card border={'1px'} borderColor={'blackAlpha.300'} w={{ "sm": "100%", "md": "360px" }} mb='5' _hover={{ 'base': {}, 'md': { boxShadow: '2xl', width: '385px' } }} transition={'0.3s'} key={listing._id}>
-                                <Link href={`/listings/${listing._id}`} _hover={'none'} marginY={'auto'}>
+                                <Link href={listing.listingURL} _hover={'none'} marginY={'auto'}>
                                     <Image src={listing.image} maxW='300px' maxHeight='300px' mx='auto' marginTop={'25px'}></Image>
                                     <CardHeader fontSize={'20px'} textAlign={'center'}>{listing.name}</CardHeader>
                                 </Link>

@@ -17,7 +17,7 @@ const Gallery = () => {
                     {productTypes &&
                         productTypes.length > 0 ?
                         (productTypes.map((productType) => (
-                            <Card border={'1px'} borderColor={'blackAlpha.300'} w={{ "sm": "100%", "md": "360px" }} mb='5' _hover={{ 'base': {}, 'md': { boxShadow: '2xl', width: '385px' } }} transition={'0.3s'} key={productType._id}>
+                            <Card border={'1px'} borderColor={'blackAlpha.300'} w={{ "base": "92%", "md": "360px" }} mb='5' _hover={{ 'base': {}, 'md': { boxShadow: '2xl', width: '385px' } }} transition={'0.3s'} key={productType._id}>
                                 <Link href={`/listings/${productType._id}`} _hover={'none'} marginY={'auto'}>
                                     <Image src={productType.image} maxW='300px' maxHeight='300px' mx='auto' marginTop={'25px'}></Image>
                                     <CardHeader fontSize={'20px'} textAlign={'center'}>{productType.name}</CardHeader>
