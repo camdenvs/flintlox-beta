@@ -14,6 +14,10 @@ const productSchema = new Schema({
     listingURL: {
         type: String,
         required: true
+    },
+    image: {
+        type: String,
+        required: true
     }
 })
 

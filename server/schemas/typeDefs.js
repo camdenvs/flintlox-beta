@@ -21,6 +21,7 @@ const typeDefs = gql`
         name: String
         productType: ID
         listingURL: String
+        image: String
     }
 
     type ProductType {
