@@ -75,8 +75,8 @@ const resolvers = {
     },
 
     Mutation: {
-        createProduct: async (parent, { name, productType, listingURL }) => {
-            return await Product.create({ name, productType, listingURL })
+        createProduct: async (parent, { name, productType, listingURL, image }) => {
+            return await Product.create({ name, productType, listingURL, image })
         },
         removeProduct: async (parent, { productId }) => {
             return await Product.findOneAndDelete({ _id: productId })
