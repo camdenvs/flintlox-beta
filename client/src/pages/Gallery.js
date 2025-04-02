@@ -1,15 +1,86 @@
-import React from "react"
-import { useQuery } from "@apollo/client"
-import { Flex, CardHeader, Image, Text, Card, Link } from '@chakra-ui/react'
-import { QUERY_PRUDUCT_TYPES } from "../utils/queries"
+import React, { useState } from "react"
+import { useQuery, useMutation } from "@apollo/client"
+import { Flex, Button, CardHeader, Image, Text, Card, Link, Modal, useDisclosure, ModalOverlay, ModalContent, ModalHeader, FormControl, FormLabel, Input, ModalBody, ModalCloseButton, ModalFooter, Box } from '@chakra-ui/react'
+import { QUERY_PRUDUCT_TYPES, QUERY_ME } from "../utils/queries"
+import { CREATE_PRODUCT_TYPE } from "../utils/mutations"
+import Auth from '../utils/auth'
 
 const Gallery = () => {
     const { loading, error, data } = useQuery(QUERY_PRUDUCT_TYPES)
-
     const productTypes = data?.productTypes || {}
+
+    const me = useQuery(QUERY_ME)
+
+    const [createProductType] = useMutation(CREATE_PRODUCT_TYPE)
+
+    const [formState, setFormState] = useState({
+        name: '',
+        subcategory: '',
+        image: '',
+    })
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormState({
+            ...formState,
+            [name]: value,
+        });
+    };
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            await createProductType({
+                variables: {
+                    ...formState
+                },
+            });
+            onClose()
+            window.location.reload()
+        }
+        catch (e) {
+            console.log(e)
+        }
+    };
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
 
     return (
         <>
+            {Auth.loggedIn() && me.data?.me.isAdmin ? (
+                <>
+                    <Box width={'100%'} display={'flex'}>
+                        <Button marginX={'auto'} marginTop={'20px'} onClick={onOpen}>Add Product Type</Button>
+                    </Box>
+                    <Modal isOpen={isOpen} onClose={onClose}>
+                        <ModalOverlay />
+                        <ModalContent>
+                            <ModalHeader textAlign={'center'}>Add New Product Type</ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody>
+                                <form>
+                                    <FormControl isRequired>
+                                        <FormLabel>Product Type Name</FormLabel>
+                                        <Input value={formState.name} name='name' onChange={handleChange} />
+                                    </FormControl>
+                                    <FormControl isRequired>
+                                        <FormLabel>Subcategory</FormLabel>
+                                        <Input value={formState.subcategory} name='subcategory' onChange={handleChange} />
+                                    </FormControl>
+                                    <FormControl isRequired>
+                                        <FormLabel>Image Address</FormLabel>
+                                        <Input value={formState.image} name='image' onChange={handleChange} />
+                                    </FormControl>
+                                </form>
+                            </ModalBody>
+
+                            <ModalFooter>
+                                <Button colorScheme="blue" onClick={handleFormSubmit}>Submit</Button>
+                            </ModalFooter>
+                        </ModalContent>
+                    </Modal>
+                </>
+            ) : (<></>)}
             {loading || error ? (
                 <div>Loading...</div>
             ) : (
