@@ -1,20 +1,90 @@
-import React from "react";
-import { useQuery } from "@apollo/client";
+import React, { useState } from "react";
+import { useQuery, useMutation } from "@apollo/client";
 import { useParams } from "react-router-dom";
-import { QUERY_PRODUCTS } from "../utils/queries";
-import { Card, CardHeader, Flex, Image, Link, Text } from "@chakra-ui/react";
+import { QUERY_PRODUCTS, QUERY_ME } from "../utils/queries";
+import { CREATE_PRODUCT } from "../utils/mutations";
+import { Box, Button, Card, CardHeader, Flex, Image, Link, Text, Modal, useDisclosure, ModalOverlay, ModalContent, ModalHeader, FormControl, FormLabel, Input, ModalBody, ModalCloseButton, ModalFooter } from "@chakra-ui/react";
+import Auth from '../utils/auth'
 
 const Listings = () => {
     const { productType } = useParams()
     const { data, loading, error } = useQuery(QUERY_PRODUCTS, {
         variables: { productType: productType }
     })
-    console.log(data, loading, error)
 
     const listings = data?.products || {}
 
+    const me = useQuery(QUERY_ME)
+
+    const [formState, setFormState] = useState({
+        name: '',
+        listingURL: '',
+        image: '',
+        productType: productType
+    })
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormState({
+            ...formState,
+            [name]: value,
+        });
+    };
+
+    const [createListing] = useMutation(CREATE_PRODUCT)
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            await createListing({
+                variables: {
+                    ...formState
+                },
+            });
+        }
+        catch (e) {
+            console.log(e)
+        }
+    };
+
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
     return (
         <>
+            {Auth.loggedIn() && me.data?.me.isAdmin ? (
+                <>
+                    <Box width={'100%'} display={'flex'}>
+                        <Button marginX={'auto'} marginTop={'20px'} onClick={onOpen}>Add Listing</Button>
+                    </Box>
+                    <Modal isOpen={isOpen} onClose={onClose}>
+                        <ModalOverlay />
+                        <ModalContent>
+                            <ModalHeader textAlign={'center'}>Add New Listing</ModalHeader>
+                            <ModalCloseButton />
+                            <ModalBody>
+                            <form>
+                                <FormControl isRequired>
+                                    <FormLabel>Listing Name</FormLabel>
+                                    <Input value={formState.name} name='name' onChange={handleChange} />
+                                </FormControl>
+                                <FormControl isRequired>
+                                    <FormLabel>Listing URL</FormLabel>
+                                    <Input value={formState.listingURL} name='listingURL' onChange={handleChange} />
+                                </FormControl>
+                                <FormControl isRequired>
+                                    <FormLabel>Image Address</FormLabel>
+                                    <Input value={formState.image} name='image' onChange={handleChange} />
+                                </FormControl>
+                            </form>
+                            </ModalBody>
+
+                            <ModalFooter>
+                                <Button colorScheme="blue" onClick={[handleFormSubmit, onClose]}>Submit</Button>
+                            </ModalFooter>
+                        </ModalContent>
+                    </Modal>
+                </>
+            ) : (<></>)}
             {loading || error ? (
                 <div>Loading...</div>
             ) : (
