@@ -85,7 +85,7 @@ return (
                 alignItems={'center'}
                 margin={{ 'base': '10px' }}
             >
-                <Link as={ReactLink} to='https://www.ebay.com/usr/flintlox'><FaEbay size={'250px'}/></Link>
+                <Link as={ReactLink} to='https://www.ebay.com/usr/flintlox' target='_blank' rel="noopener noreferrer"><FaEbay size={'250px'}/></Link>
             </Box>
             <Box
                 display={'flex'}
@@ -93,7 +93,7 @@ return (
                 alignItems={'center'}
                 margin={{ 'base': '10px' }}
             >
-                <Link as={ReactLink} to='https://www.etsy.com/shop/FlintloxLeatherGoods'>
+                <Link as={ReactLink} to='https://www.etsy.com/shop/FlintloxLeatherGoods' target='_blank' rel="noopener noreferrer">
                     <Box   
                         margin={'50px'} 
                         alignItems={'center'} 
