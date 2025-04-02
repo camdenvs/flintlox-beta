@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { QUERY_PRODUCTS, QUERY_ME } from "../utils/queries";
-import { CREATE_PRODUCT } from "../utils/mutations";
+import { CREATE_PRODUCT, REMOVE_PRODUCT } from "../utils/mutations";
 import { Box, Button, Card, CardHeader, Flex, Image, Link, Text, Modal, useDisclosure, ModalOverlay, ModalContent, ModalHeader, FormControl, FormLabel, Input, ModalBody, ModalCloseButton, ModalFooter } from "@chakra-ui/react";
 import Auth from '../utils/auth'
+import { FaTrash } from "react-icons/fa";
 
 const Listings = () => {
     const { productType } = useParams()
@@ -32,6 +33,7 @@ const Listings = () => {
     };
 
     const [createListing] = useMutation(CREATE_PRODUCT)
+    const [removeListing] = useMutation(REMOVE_PRODUCT)
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -41,11 +43,30 @@ const Listings = () => {
                     ...formState
                 },
             });
+            onClose()
+            window.location.reload()
         }
         catch (e) {
             console.log(e)
         }
     };
+
+    const handleRemoveListing = async (event) => {
+        event.preventDefault()
+        const productId = event.target.value
+        try {
+            console.log(event.target)
+            await removeListing({
+                variables: {
+                    productId
+                }
+            })
+            window.location.reload()
+        }
+        catch (e) {
+            console.log(e)
+        }
+    }
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -79,7 +100,7 @@ const Listings = () => {
                             </ModalBody>
 
                             <ModalFooter>
-                                <Button colorScheme="blue" onClick={[handleFormSubmit, onClose]}>Submit</Button>
+                                <Button colorScheme="blue" onClick={handleFormSubmit}>Submit</Button>
                             </ModalFooter>
                         </ModalContent>
                     </Modal>
@@ -93,6 +114,7 @@ const Listings = () => {
                         listings.length > 0 ?
                         (listings.map((listing) => (
                             <Card border={'1px'} borderColor={'blackAlpha.300'} w={{ "sm": "100%", "md": "360px" }} mb='5' _hover={{ 'base': {}, 'md': { boxShadow: '2xl', width: '385px' } }} transition={'0.3s'} key={listing._id}>
+                                {Auth.loggedIn() && me.data?.me.isAdmin ? (<Button colorScheme="red" onClick={handleRemoveListing} value={listing._id}><FaTrash /></Button>) : (<></>)}
                                 <Link href={listing.listingURL} _hover={'none'} marginY={'auto'} target='_blank' rel="noopener noreferrer">
                                     <Image src={listing.image} maxW='300px' maxHeight='300px' mx='auto' marginTop={'25px'}></Image>
                                     <CardHeader fontSize={'20px'} textAlign={'center'}>{listing.name}</CardHeader>

@@ -34,7 +34,7 @@ export const ADD_TO_NEWSLETTER = gql`
 `;
 
 export const CREATE_PRODUCT = gql`
-  mutation createProduct($name: String!, $productType: ID!, $listingURL: String!, $image: String) {
+  mutation createProduct($name: String!, $productType: ID!, $listingURL: String!, $image: String!) {
     createProduct(name: $name, productType: $productType, listingURL: $listingURL, image: $image) {
       _id
       name
