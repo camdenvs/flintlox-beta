@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, Image, Box, Heading, Text, Button } from '@chakra-ui/react'
 import { Link as ReactLink, useLocation } from 'react-router-dom'
 import { FaChevronDown } from 'react-icons/fa'
-// import Auth from '../../utils/auth'
+import Auth from '../../utils/auth'
 // import ShoppingCart from './ShoppingCart'
 
 const Header = (props) => {
@@ -13,10 +13,10 @@ const Header = (props) => {
         setNavbarOpen(false); // Close the navigation panel
     }, [pathname])
 
-    // const logout = (event) => {
-    //     event.preventDefault()
-    //     Auth.logout()
-    // }
+    const logout = (event) => {
+        event.preventDefault()
+        Auth.logout()
+    }
 
     const toggleNav = (event) => {
         event.preventDefault()
@@ -50,20 +50,23 @@ const Header = (props) => {
                     <Text display={{ 'base': 'none', 'md': 'flex' }} fontSize={'14px'} fontWeight={'400'}>Handcrafted in the United States of America</Text>
                 </Box>
 
-                {/* <Box width={{ 'base': '64px', 'md': '75px' }} textAlign={'center'}>
+                
 
                     {Auth.loggedIn() ? (
+                        
                         <>
-                            <Link as={ReactLink} to='/account' textDecoration={'none'} display={{ 'base': 'none', 'md': 'block' }}>Account</Link>
-                            <Link onClick={logout} textDecoration={'none'} display={{ 'base': 'none', 'md': 'block' }}>Logout</Link>
+                            {/* <Link as={ReactLink} to='/account' textDecoration={'none'} display={{ 'base': 'none', 'md': 'block' }}>Account</Link> */}
+                            <Link onClick={logout} textDecoration={'none'} display={{ 'base': 'none', 'md': 'block' }} pos={'fixed'} right={'25'}>Logout</Link>
                         </>
+                        
                     ) : (
-                        <Link as={ReactLink} to='/login' display={{ 'base': 'none', 'md': 'inline' }}>Login</Link>
+                        <></>
+                        // <Link as={ReactLink} to='/login' display={{ 'base': 'none', 'md': 'inline' }}>Login</Link>
                     )}
 
-                    <ShoppingCart cart={props.cart} setCart={props.setCart} />
+                    {/* <ShoppingCart cart={props.cart} setCart={props.setCart} /> */}
 
-                </Box> */}
+                
             </Box>
             <Box
                 display={{ 'base': 'none', 'md': 'flex' }}

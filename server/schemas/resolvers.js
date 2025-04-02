@@ -81,6 +81,9 @@ const resolvers = {
         removeProduct: async (parent, { productId }) => {
             return await Product.findOneAndDelete({ _id: productId })
         },
+        createProductType: async (parent, { name, subcategory, image }) => {
+            return await ProductType.create({ name, subcategory, image })
+        },
         createUser: async (parent, { username, email, password }) => {
             const user = await User.create({ username, email, password, cart: null });
             const token = signToken(user);
