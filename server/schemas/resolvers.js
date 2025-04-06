@@ -31,6 +31,9 @@ const resolvers = {
         productTypes: async () => {
             return await ProductType.find()
         },
+        productType: async (parent, { productTypeID }) => {
+            return await ProductType.find({ _id: productTypeID })
+        },
         me: async (parent, args, context) => {
             if (context.user) {
                 return await User.findOne({ _id: context.user._id });
@@ -81,8 +84,8 @@ const resolvers = {
         removeProduct: async (parent, { productId }) => {
             return await Product.findOneAndDelete({ _id: productId })
         },
-        createProductType: async (parent, { name, subcategory, image }) => {
-            return await ProductType.create({ name, subcategory, image })
+        createProductType: async (parent, { name, subcategory, image, description }) => {
+            return await ProductType.create({ name, subcategory, image, description })
         },
         createUser: async (parent, { username, email, password }) => {
             const user = await User.create({ username, email, password, cart: null });

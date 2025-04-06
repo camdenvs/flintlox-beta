@@ -19,6 +19,19 @@ export const QUERY_PRUDUCT_TYPES = gql`
       name
       image
       subcategory
+      description
+    }
+  }
+`
+
+export const QUERY_PRUDUCT_TYPE = gql`
+  query getProductType {
+    productType {
+      _id
+      name
+      image
+      subcategory
+      description
     }
   }
 `

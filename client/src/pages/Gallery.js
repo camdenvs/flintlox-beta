@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useQuery, useMutation } from "@apollo/client"
-import { Flex, Button, CardHeader, Image, Text, Card, Link, Modal, useDisclosure, ModalOverlay, ModalContent, ModalHeader, FormControl, FormLabel, Input, ModalBody, ModalCloseButton, ModalFooter, Box } from '@chakra-ui/react'
+import { Flex, Button, CardHeader, Image, Text, Card, Link, Modal, useDisclosure, ModalOverlay, ModalContent, ModalHeader, FormControl, FormLabel, Input, ModalBody, ModalCloseButton, ModalFooter, Box, Textarea } from '@chakra-ui/react'
 import { QUERY_PRUDUCT_TYPES, QUERY_ME } from "../utils/queries"
 import { CREATE_PRODUCT_TYPE } from "../utils/mutations"
 import Auth from '../utils/auth'
@@ -70,6 +70,10 @@ const Gallery = () => {
                                     <FormControl isRequired>
                                         <FormLabel>Image Address</FormLabel>
                                         <Input value={formState.image} name='image' onChange={handleChange} />
+                                    </FormControl>
+                                    <FormControl isRequired>
+                                        <FormLabel>Description</FormLabel>
+                                        <Textarea value={formState.description} name='description' onChange={handleChange} />
                                     </FormControl>
                                 </form>
                             </ModalBody>
