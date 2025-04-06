@@ -29,6 +29,7 @@ const typeDefs = gql`
         name: String
         image: String
         subcategory: String
+        description: String
     }
 
     type Item {
@@ -72,6 +73,7 @@ const typeDefs = gql`
         user(username: String!): User
         products(productType: ID, ids: [ID]): [Product]
         product(productId: ID!): Product
+        productType(productTypeId: ID): ProductType
         productTypes: [ProductType]
         orders(userId: ID!): [Order]
         cart(userId: ID!): Cart
@@ -81,7 +83,7 @@ const typeDefs = gql`
     type Mutation {
         createProduct(name: String! productType: ID!, listingURL: String!, image: String!): Product
         removeProduct(productId: ID!): Product
-        createProductType(name: String!, subcategory: String!, image: String!): ProductType
+        createProductType(name: String!, subcategory: String!, image: String!, description: String!): ProductType
         createUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
         addToCart(userId: ID!, name: String!, stripeProductId: String!, price: Int!, image: String!): Cart

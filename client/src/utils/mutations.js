@@ -46,12 +46,13 @@ export const CREATE_PRODUCT = gql`
 `
 
 export const CREATE_PRODUCT_TYPE = gql`
-  mutation createProductType($name: String!, $image: String!, $subcategory: String!) {
-    createProductType(name: $name, image: $image, subcategory: $subcategory) {
+  mutation createProductType($name: String!, $image: String!, $subcategory: String!, $description: String!) {
+    createProductType(name: $name, image: $image, subcategory: $subcategory, description: $description) {
       _id
       name
       image
       subcategory
+      description
     }
   }
 `
