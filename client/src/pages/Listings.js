@@ -127,7 +127,7 @@ const Listings = () => {
                             </>
                         )
                     }
-                    <Box>{console.log(productType.data)}</Box>
+                    <Box>{productType.data?.productType.description}</Box>
                 </Flex>
             )
             }
