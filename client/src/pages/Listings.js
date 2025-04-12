@@ -54,7 +54,6 @@ const Listings = () => {
     };
 
     const handleRemoveListing = async (event) => {
-        console.log(event.target)
         const productId = event.target.value
         try {
             await removeListing({
