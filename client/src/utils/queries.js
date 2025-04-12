@@ -25,8 +25,8 @@ export const QUERY_PRUDUCT_TYPES = gql`
 `
 
 export const QUERY_PRUDUCT_TYPE = gql`
-  query getProductType {
-    productType {
+  query getProductType($productTypeId: ID!) {
+    productType(productTypeId: $productTypeId) {
       _id
       name
       image

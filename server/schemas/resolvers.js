@@ -31,8 +31,8 @@ const resolvers = {
         productTypes: async () => {
             return await ProductType.find()
         },
-        productType: async (parent, { productTypeID }) => {
-            return await ProductType.find({ _id: productTypeID })
+        productType: async (parent, { productTypeId }) => {
+            return await ProductType.find({ _id: productTypeId })
         },
         me: async (parent, args, context) => {
             if (context.user) {

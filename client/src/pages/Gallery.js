@@ -17,6 +17,7 @@ const Gallery = () => {
         name: '',
         subcategory: '',
         image: '',
+        description: ''
     })
 
     const handleChange = (event) => {
