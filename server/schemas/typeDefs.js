@@ -2,6 +2,8 @@ const { gql } = require('apollo-server-express')
 
 
 const typeDefs = gql`
+    scalar Upload
+
     type Auth {
         token: ID!
         user: User
@@ -83,7 +85,7 @@ const typeDefs = gql`
     type Mutation {
         createProduct(name: String! productType: ID!, listingURL: String!, image: String!): Product
         removeProduct(productId: ID!): Product
-        createProductType(name: String!, subcategory: String!, image: String!, description: String!): ProductType
+        createProductType(name: String!, subcategory: String!, imageFile: Upload!, description: String!): ProductType
         createUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
         addToCart(userId: ID!, name: String!, stripeProductId: String!, price: Int!, image: String!): Cart
