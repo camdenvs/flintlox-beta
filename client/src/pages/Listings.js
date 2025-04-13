@@ -3,7 +3,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { QUERY_PRODUCTS, QUERY_ME, QUERY_PRUDUCT_TYPE } from "../utils/queries";
 import { CREATE_PRODUCT, REMOVE_PRODUCT } from "../utils/mutations";
-import { Box, Button, Card, CardHeader, Flex, Image, Link, Text, Modal, useDisclosure, ModalOverlay, ModalContent, ModalHeader, FormControl, FormLabel, Input, ModalBody, ModalCloseButton, ModalFooter } from "@chakra-ui/react";
+import { Box, Button, Card, CardHeader, Flex, Image, Link, Text, Modal, useDisclosure, ModalOverlay, ModalContent, ModalHeader, FormControl, FormLabel, Input, ModalBody, ModalCloseButton, ModalFooter, Heading } from "@chakra-ui/react";
 import Auth from '../utils/auth'
 
 const Listings = () => {
@@ -83,20 +83,20 @@ const Listings = () => {
                             <ModalHeader textAlign={'center'}>Add New Listing</ModalHeader>
                             <ModalCloseButton />
                             <ModalBody>
-                            <form>
-                                <FormControl isRequired>
-                                    <FormLabel>Listing Name</FormLabel>
-                                    <Input value={formState.name} name='name' onChange={handleChange} />
-                                </FormControl>
-                                <FormControl isRequired>
-                                    <FormLabel>Listing URL</FormLabel>
-                                    <Input value={formState.listingURL} name='listingURL' onChange={handleChange} />
-                                </FormControl>
-                                <FormControl isRequired>
-                                    <FormLabel>Image Address</FormLabel>
-                                    <Input value={formState.image} name='image' onChange={handleChange} />
-                                </FormControl>
-                            </form>
+                                <form>
+                                    <FormControl isRequired>
+                                        <FormLabel>Listing Name</FormLabel>
+                                        <Input value={formState.name} name='name' onChange={handleChange} />
+                                    </FormControl>
+                                    <FormControl isRequired>
+                                        <FormLabel>Listing URL</FormLabel>
+                                        <Input value={formState.listingURL} name='listingURL' onChange={handleChange} />
+                                    </FormControl>
+                                    <FormControl isRequired>
+                                        <FormLabel>Image Address</FormLabel>
+                                        <Input value={formState.image} name='image' onChange={handleChange} />
+                                    </FormControl>
+                                </form>
                             </ModalBody>
 
                             <ModalFooter>
@@ -109,11 +109,15 @@ const Listings = () => {
             {loading || error ? (
                 <div>Loading...</div>
             ) : (
-                <Flex flexDir={'row'} flexWrap={'wrap'} justifyContent={"space-around"} mt='5' mx='auto' w={{ "sm": "95%", "md": "760px", "xl": '1200px' }}>
+                <Flex flexDir={{ "base": "column", "md": 'row-reverse' }} flexWrap={'wrap'} justifyContent={"space-around"} mt='5' mx='auto' w={{ "sm": "95%", "md": "760px", "xl": '1200px' }}>
+                    <Box w={{ "sm": "100%", "md": "360px" }} mb='5' p={'10px'} fontSize={'24px'} textAlign={'center'}>
+                        <Heading my={'15px'}>{productType.data?.productType.name}</Heading>
+                        <Text>{productType.data?.productType.description}</Text>
+                    </Box>
                     {listings &&
                         listings.length > 0 ?
                         (listings.map((listing) => (
-                            <Card border={'1px'} borderColor={'blackAlpha.300'} w={{ "sm": "100%", "md": "360px" }} mb='5' _hover={{ 'base': {}, 'md': { boxShadow: '2xl', width: '385px' } }} transition={'0.3s'} key={listing._id}>
+                            <Card border={'1px'} borderColor={'blackAlpha.300'} borderRadius={'10px'} w={{ "sm": "100%", "md": "360px" }} mb='5' _hover={{ 'base': {}, 'md': { boxShadow: '2xl', width: '385px' } }} transition={'0.3s'} key={listing._id}>
                                 {Auth.loggedIn() && me.data?.me.isAdmin ? (<Button colorScheme="red" onClick={handleRemoveListing} value={listing._id}>Remove</Button>) : (<></>)}
                                 <Link href={listing.listingURL} _hover={'none'} marginY={'auto'} target='_blank' rel="noopener noreferrer">
                                     <Image src={listing.image} maxW='300px' maxHeight='300px' mx='auto' marginTop={'25px'}></Image>
@@ -126,7 +130,7 @@ const Listings = () => {
                             </>
                         )
                     }
-                    <Box>{productType.data?.productType.description}</Box>
+
                 </Flex>
             )
             }
