@@ -3,8 +3,24 @@ const { User, Product, Order, Cart, ProductType } = require('../models');
 const { signToken } = require('../utils/auth');
 require('dotenv').config()
 const stripe = require("stripe")(process.env.STRIPE_KEY)
+const { GraphQLUpload } = require("graphql-upload")
+const path = require("path");
+const fs = require("fs");
+
+const storeUpload = async (upload) => {
+    const { createReadStream, filename } = await upload;
+    const stream = createReadStream();
+    const filePath = path.join(__dirname, "uploads", `${Date.now()}-${filename}`);
+    const writeStream = fs.createWriteStream(filePath);
+    await new Promise((resolve, reject) =>
+        stream.pipe(writeStream).on("finish", resolve).on("error", reject)
+    );
+    return filePath;
+};
 
 const resolvers = {
+    Upload: GraphQLUpload,
+
     Query: {
         users: async () => {
             return await User.find()
@@ -84,8 +100,11 @@ const resolvers = {
         removeProduct: async (parent, { productId }) => {
             return await Product.findOneAndDelete({ _id: productId })
         },
-        createProductType: async (parent, { name, subcategory, image, description }) => {
-            return await ProductType.create({ name, subcategory, image, description })
+        createProductType: async (parent, { name, subcategory, imageFile, description }) => {
+            const filePath = await storeUpload(imageFile);
+            const imageURL = `/uploads/${path.basename(filePath)}`;
+
+            return await ProductType.create({ name, subcategory, image: imageURL, description })
         },
         createUser: async (parent, { username, email, password }) => {
             const user = await User.create({ username, email, password, cart: null });
